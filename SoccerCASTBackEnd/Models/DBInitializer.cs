@@ -20,8 +20,8 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.Users.AddRange(
-                new User { Password = "test", FirstName = "Player", LastName = "1", Email = "player1@thomasmore.be", BirthDate = new DateTime(1969,5,4), RoleID = 1, TimesLost=0, TimesWon=0 },
-                new User { Password = "test", FirstName = "Player", LastName = "2", Email = "player2@thomasmore.be", BirthDate = new DateTime(1969, 11, 21), RoleID = 1, TimesLost = 0, TimesWon = 0 }
+                new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Player", LastName = "1", Email = "player1@thomasmore.be", BirthDate = new DateTime(1969,5,4), RoleID = 1, TimesLost=0, TimesWon=0 },
+                new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Player", LastName = "2", Email = "player2@thomasmore.be", BirthDate = new DateTime(1969, 11, 21), RoleID = 1, TimesLost = 0, TimesWon = 0 }
             );
 
             context.SaveChanges();
