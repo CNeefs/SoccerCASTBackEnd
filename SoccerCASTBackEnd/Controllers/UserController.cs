@@ -33,6 +33,8 @@ namespace SoccerCASTBackEnd.Controllers {
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            //TODO Check if email already exists
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -40,7 +42,8 @@ namespace SoccerCASTBackEnd.Controllers {
         }
 
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] User userParam) {
+        public IActionResult Authenticate([FromBody] User userParam)
+        {
             var user = _userService.Authenticate(userParam.Email, userParam.Password);
 
             if (user == null)
