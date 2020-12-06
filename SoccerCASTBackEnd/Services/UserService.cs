@@ -40,7 +40,13 @@ namespace SoccerCASTBackEnd.Services {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim("UserID", user.UserID.ToString()),
-                    new Claim("Email", user.Email)
+                    new Claim("FirstName", user.FirstName),
+                    new Claim("LastName", user.LastName),
+                    new Claim("Email", user.Email),
+                    new Claim("BirthDay", user.BirthDate.ToString()),
+                    new Claim("RoleID", user.RoleID.ToString()),
+                    new Claim("TimesLost", user.TimesLost.ToString()),
+                    new Claim("TimesWon", user.TimesWon.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
