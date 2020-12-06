@@ -14,9 +14,10 @@ namespace SoccerCASTBackEnd.Models {
                 return;   // DB has been seeded
             }
 
-            context.Roles.Add(
-                new Role { Name = "Speler" }
-                );
+            context.Roles.AddRange(
+                new Role { Name = "User" },
+                new Role { Name = "Admin" }
+            );
             context.SaveChanges();
 
             context.Users.AddRange(
