@@ -27,7 +27,8 @@ namespace SoccerCASTBackEnd.Controllers
 
 
         }
-        [HttpGet("/UserTeams{id}")]
+
+        [HttpGet("/UserTeams/{id}")]
         public async Task<ActionResult<IEnumerable<Team>>> GetUserTeams(int id)
         {
             List<Team> teams = null;
@@ -43,9 +44,26 @@ namespace SoccerCASTBackEnd.Controllers
                 teams.Add(tempTeam);
             }
 
-            return await teams;
-            
-            
+            return teams;
+        }
+
+        [HttpGet("/TeamUsers/{id}")]
+        public async Task<ActionResult<IEnumerable<User>>> GetTeamUsers(int id)
+        {
+            List<User> users = null;
+            var userteams = await _context.UserTeam.Where(ut => ut.TeamID == id).ToListAsync();
+            if (userteams == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var userteam in userteams)
+            {
+                User tempUser = await _context.Users.SingleOrDefaultAsync(u => u.UserID == userteam.UserID);
+                users.Add(tempUser);
+            }
+
+            return users;
         }
 
         [HttpPost]
