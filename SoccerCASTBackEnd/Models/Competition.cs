@@ -8,10 +8,7 @@ namespace SoccerCASTBackEnd.Models
     public class Competition
     {
         public int CompetitionID { get; set; }
-        public String Name { get; set; }
-
-        //relations
-        public int TournamentID { get; set; }
-        public Tournament Tournament { get; set; }
+        public string Name { get; set; }
+        public bool isActive { get; set; }
     }
 }
