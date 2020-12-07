@@ -30,7 +30,7 @@ namespace SoccerCASTBackEnd.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserTeam>> GetUserTeam(int id)
         {
-            var userteam = await _context.UserTeam.SingleOrDefaultAsync();
+            var userteam = await _context.UserTeam.SingleOrDefaultAsync(ut => ut.UserTeamID == id);
             if (userteam == null)
             {
                 return NotFound();

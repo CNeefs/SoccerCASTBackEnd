@@ -29,7 +29,7 @@ namespace SoccerCASTBackEnd.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id)
         {
-            var team = await _context.Teams.SingleOrDefaultAsync(id);
+            var team = await _context.Teams.SingleOrDefaultAsync(t => t.TeamID == id);
             if (team == null)
             {
                 return NotFound();
