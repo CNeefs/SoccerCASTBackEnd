@@ -22,7 +22,7 @@ namespace SoccerCASTBackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
         {
-            return await _context.Teams.ToListAsync();
+            return await _context.Teams.Include(t => t.Captain).ToListAsync();
 
 
         }
