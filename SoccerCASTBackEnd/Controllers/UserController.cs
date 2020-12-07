@@ -33,7 +33,14 @@ namespace SoccerCASTBackEnd.Controllers {
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            //TODO Check if email already exists
+            var users = await _context.Users.ToListAsync();
+            foreach(User checkUser in users)
+            {
+                if (checkUser.Email.Equals(user.Email))
+                {
+                    return BadRequest(new { message = "This email is already in use." });
+                }
+            }
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
