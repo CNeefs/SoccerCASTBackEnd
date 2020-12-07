@@ -9,5 +9,6 @@ namespace SoccerCASTBackEnd.Models
     {
         public int CompetitionID { get; set; }
         public string Name { get; set; }
+        public bool isActive { get; set; }
     }
 }
