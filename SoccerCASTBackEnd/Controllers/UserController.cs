@@ -59,6 +59,39 @@ namespace SoccerCASTBackEnd.Controllers {
             return Ok(user);
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<User>> PutUser(int id, User user)
+        {
+            if (id != user.UserID)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return NoContent();
+        }
+
+        private bool UserExists(int id)
+        {
+            return _context.Users.Any(u => u.UserID == id);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
