@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace SoccerCASTBackEnd.Models
 {
-    public class Competition
+    public class MatchStatus
     {
-        public int CompetitionID { get; set; }
-        public string Name { get; set; }
+        public int MatchStatusID { get; set; }
+        public string StatusName { get; set; }
     }
 }
