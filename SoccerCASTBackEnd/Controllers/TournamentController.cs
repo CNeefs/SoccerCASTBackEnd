@@ -12,62 +12,62 @@ namespace SoccerCASTBackEnd.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CompetitionController : ControllerBase
+    public class TournamentController : ControllerBase
     {
         private readonly SoccerContext _context;
-        public CompetitionController(SoccerContext context)
+        public TournamentController(SoccerContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Competition>>> GetCompetitions()
+        public async Task<ActionResult<IEnumerable<Tournament>>> GetTournaments()
         {
-            return await _context.Competitions.ToListAsync();
+            return await _context.Tournaments.ToListAsync();
 
 
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Competition>> GetCompetition(int id)
+        public async Task<ActionResult<Tournament>> GetTournament(int id)
         {
-            var competition =  await _context.Competitions.SingleOrDefaultAsync(id);
-            if(competition == null)
+            var tournament = await _context.Tournaments.SingleOrDefaultAsync(id);
+            if (tournament == null)
             {
                 return NotFound();
             }
-            return competition;
+            return tournament;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Competition>> PostCompetition(Competition competition)
+        public async Task<ActionResult<Tournament>> PostTournament(Tournament tournament)
         {
-            _context.Competitions.Add(competition);
+            _context.Tournaments.Add(tournament);
             await _context.SaveChangesAsync();
-            return Ok(competition);
+            return Ok(tournament);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Competition>> DeleteCompetition(int id)
+        public async Task<ActionResult<Tournament>> DeleteTournament(int id)
         {
-            var competition = await _context.Competitions.FindAsync(id);
-            if (competition == null)
+            var tournament = await _context.Tournaments.FindAsync(id);
+            if (tournament == null)
             {
                 return NotFound();
             }
 
-            _context.Competitions.Remove(competition);
+            _context.Tournaments.Remove(tournament);
             await _context.SaveChangesAsync();
-            return competition;
+            return tournament;
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<Competition>> PutCompetition(int id, Competition competition)
+        public async Task<ActionResult<Tournament>> PutTournament(int id, Tournament tournament)
         {
-            if (id != competition.CompetitionID)
+            if (id != tournament.TournamentID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(competition).State = EntityState.Modified;
+            _context.Entry(tournament).State = EntityState.Modified;
 
             try
             {
@@ -75,7 +75,7 @@ namespace SoccerCASTBackEnd.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CompetitionExists(id))
+                if (!TournamentExists(id))
                 {
                     return NotFound();
                 }
@@ -87,9 +87,9 @@ namespace SoccerCASTBackEnd.Controllers
             return NoContent();
         }
 
-        private bool CompetitionExists(int id)
+        private bool TournamentExists(int id)
         {
-            return _context.Competitions.Any(c => c.CompetitionID == id);
+            return _context.Tournaments.Any(c => c.TournamentID == id);
         }
     }
 }

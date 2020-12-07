@@ -52,7 +52,7 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.Competitions.Add(
-                new Competition { Name="Eerste klasse"}
+                new Competition { Name="Eerste klasse", isActive = true}
                 );
             context.SaveChanges();
 
