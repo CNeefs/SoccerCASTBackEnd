@@ -31,6 +31,9 @@ namespace SoccerCASTBackEnd.Controllers
                 .Include(m => m.Player2)
                 .Include(m => m.Team1)
                 .Include(m => m.Team2)
+                .Include(m => m.MatchStatus)
+                .Include(m => m.Competition)
+                .Include(m => m.Tournament)
                 .ToListAsync();
         }
 
@@ -44,6 +47,9 @@ namespace SoccerCASTBackEnd.Controllers
                 .Include(m => m.Player2)
                 .Include(m => m.Team1)
                 .Include(m => m.Team2)
+                .Include(m => m.MatchStatus)
+                .Include(m => m.Competition)
+                .Include(m => m.Tournament)
                 .SingleOrDefaultAsync(m => m.MatchID == id);
             if (match == null)
             {
