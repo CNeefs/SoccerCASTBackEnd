@@ -28,7 +28,7 @@ namespace SoccerCASTBackEnd.Controllers
 
         }
 
-        [HttpGet("/UserTeams/{id}")]
+        [HttpGet("UserTeams/{id}")]
         public async Task<ActionResult<IEnumerable<Team>>> GetUserTeams(int id)
         {
             return await _context.UserTeam.Where(ut => ut.UserID == id)
@@ -36,7 +36,7 @@ namespace SoccerCASTBackEnd.Controllers
                 .ToListAsync();
         }
 
-        [HttpGet("/TeamUsers/{id}")]
+        [HttpGet("TeamUsers/{id}")]
         public async Task<ActionResult<IEnumerable<User>>> GetTeamUsers(int id)
         {
             return await _context.UserTeam.Where(ut=> ut.TeamID == id)
@@ -50,6 +50,20 @@ namespace SoccerCASTBackEnd.Controllers
             _context.UserTeam.Add(userteam);
             await _context.SaveChangesAsync();
             return Ok(userteam);
+        }
+
+        [HttpDelete("User/{userID}/Team/{teamID}")]
+        public async Task<ActionResult<UserTeam>> DeleteUserTeam(int userID, int teamID)
+        {
+            var userteam = await _context.UserTeam.SingleOrDefaultAsync(ut => ut.UserID == userID && ut.TeamID == teamID);
+            if (userteam == null)
+            {
+                return NotFound();
+            }
+
+            _context.UserTeam.Remove(userteam);
+            await _context.SaveChangesAsync();
+            return userteam;
         }
 
         [HttpDelete("{id}")]
