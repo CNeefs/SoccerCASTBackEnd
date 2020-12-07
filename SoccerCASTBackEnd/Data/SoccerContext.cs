@@ -34,11 +34,31 @@ namespace SoccerCASTBackEnd.Data {
             modelBuilder.Entity<UserRole>()
                 .ToTable("UserRoles");
 
+            modelBuilder.Entity<UserRole>()
+                .HasOne(ur => ur.User)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserRole>()
+                .HasOne(ur => ur.Role)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Role>()
                 .ToTable("Roles");
 
             modelBuilder.Entity<RolePermission>()
                 .ToTable("RolePermissions");
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Role)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Permission)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Permission>()
                 .ToTable("Permissions");
@@ -57,6 +77,16 @@ namespace SoccerCASTBackEnd.Data {
 
             modelBuilder.Entity<UserTeam>()
                 .ToTable("UserTeam");
+
+            modelBuilder.Entity<UserTeam>()
+                .HasOne(ut => ut.User)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserTeam>()
+                .HasOne(ut => ut.Team)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Competition>()
                 .ToTable("Competitions");
