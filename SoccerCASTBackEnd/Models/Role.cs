@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SoccerCASTBackEnd.Models
@@ -9,9 +10,5 @@ namespace SoccerCASTBackEnd.Models
     {
         public int RoleID { get; set; }
         public string Name { get; set; }
-
-        //relations
-        public int PermissionID { get; set; }
-        public Permission Permission{get;set;}
     }
 }

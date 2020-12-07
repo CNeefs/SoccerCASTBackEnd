@@ -20,15 +20,44 @@ namespace SoccerCASTBackEnd.Models {
             );
             context.SaveChanges();
 
-            context.Users.AddRange(
-                new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Player", LastName = "1", Email = "player1@thomasmore.be", BirthDate = new DateTime(1969,5,4), RoleID = 1, TimesLost=0, TimesWon=0 },
-                new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Player", LastName = "2", Email = "player2@thomasmore.be", BirthDate = new DateTime(1969, 11, 21), RoleID = 1, TimesLost = 0, TimesWon = 0 }
-            );
+            context.Permissions.AddRange(
+                new Permission { Name = "createTable"},
+                new Permission { Name = "updateTable" },
+                new Permission { Name = "deleteTable" },
+                new Permission { Name = "editTable" },
+                new Permission { Name = "createMatch" },
+                new Permission { Name = "updateMatch" },
+                new Permission { Name = "deleteMatch" },
+                new Permission { Name = "updateMatch" }
+                );
+            context.SaveChanges();
 
+            context.RolePermissions.AddRange(
+                new RolePermission { PermissionID = 1, RoleID = 2},
+                new RolePermission { PermissionID = 2, RoleID = 2 },
+                new RolePermission { PermissionID = 3, RoleID = 2 },
+                new RolePermission { PermissionID = 4, RoleID = 2 },
+                new RolePermission { PermissionID = 5, RoleID = 2 },
+                new RolePermission { PermissionID = 6, RoleID = 2 },
+                new RolePermission { PermissionID = 7, RoleID = 2 },
+                new RolePermission { PermissionID = 8, RoleID = 2 }
+                );
+            context.SaveChanges();
+
+            context.Users.AddRange(
+                new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Peter", LastName = "Celie", Email = "player1@thomasmore.be", BirthDate = new DateTime(1969,5,4), TimesLost=0, TimesWon=0 },
+                new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Tom", LastName = "Aat", Email = "player2@thomasmore.be", BirthDate = new DateTime(1969, 11, 21), TimesLost = 0, TimesWon = 0 }
+            );
+            context.SaveChanges();
+
+            context.UserRoles.AddRange(
+                new UserRole { UserID = 1, RoleID = 2},
+                new UserRole { UserID = 2, RoleID = 1}
+                );
             context.SaveChanges();
 
             context.Tables.Add(
-                new Table { TableName = "Tafel 1", Adres = "Molenstraat 21 2000 Antwerpen", ContactUserID = 1}
+                new Table { TableName = "Tafel 1", Locatie = "Molenstraat 21 2000 Antwerpen", ContactUserID = 1}
                 );
             context.SaveChanges();
 

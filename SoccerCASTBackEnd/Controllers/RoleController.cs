@@ -21,11 +21,11 @@ namespace SoccerCASTBackEnd.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Role>>> GetMatchStatuses()
+        public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
             return await _context.Roles.ToListAsync();
-
-
         }
+
+
     }
 }

@@ -44,7 +44,6 @@ namespace SoccerCASTBackEnd.Services {
                     new Claim("LastName", user.LastName),
                     new Claim("Email", user.Email),
                     new Claim("BirthDay", user.BirthDate.ToString()),
-                    new Claim("RoleID", user.RoleID.ToString()),
                     new Claim("TimesLost", user.TimesLost.ToString()),
                     new Claim("TimesWon", user.TimesWon.ToString())
                 }),

@@ -15,6 +15,7 @@ namespace SoccerCASTBackEnd.Data {
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; } 
         public DbSet<Role> Roles { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Match> Matches { get; set; }
@@ -27,18 +28,44 @@ namespace SoccerCASTBackEnd.Data {
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<User>().ToTable("Users");
-            modelBuilder.Entity<UserRole>().ToTable("UserRoles");
-            modelBuilder.Entity<Role>().ToTable("Roles");
-            modelBuilder.Entity<Permission>().ToTable("Permissions");
-            modelBuilder.Entity<Team>().ToTable("Teams");
-            modelBuilder.Entity<Match>().ToTable("Matches");
-            modelBuilder.Entity<MatchType>().ToTable("MatchTypes");
-            modelBuilder.Entity<Table>().ToTable("Tables");
-            modelBuilder.Entity<UserTeam>().ToTable("UserTeam");
-            modelBuilder.Entity<Competition>().ToTable("Competitions");
-            modelBuilder.Entity<Tournament>().ToTable("Tournaments");
-            modelBuilder.Entity<MatchStatus>().ToTable("MatchStatuses");
+            modelBuilder.Entity<User>()
+                .ToTable("Users");
+
+            modelBuilder.Entity<UserRole>()
+                .ToTable("UserRoles");
+
+            modelBuilder.Entity<Role>()
+                .ToTable("Roles");
+
+            modelBuilder.Entity<RolePermission>()
+                .ToTable("RolePermissions");
+
+            modelBuilder.Entity<Permission>()
+                .ToTable("Permissions");
+
+            modelBuilder.Entity<Team>()
+                .ToTable("Teams");
+
+            modelBuilder.Entity<Match>()
+                .ToTable("Matches");
+
+            modelBuilder.Entity<MatchType>()
+                .ToTable("MatchTypes");
+
+            modelBuilder.Entity<Table>()
+                .ToTable("Tables");
+
+            modelBuilder.Entity<UserTeam>()
+                .ToTable("UserTeam");
+
+            modelBuilder.Entity<Competition>()
+                .ToTable("Competitions");
+
+            modelBuilder.Entity<Tournament>()
+                .ToTable("Tournaments");
+
+            modelBuilder.Entity<MatchStatus>()
+                .ToTable("MatchStatuses");
         }
     }
 }
