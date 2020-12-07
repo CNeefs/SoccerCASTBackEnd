@@ -32,22 +32,32 @@ namespace SoccerCASTBackEnd.Models {
                 );
             context.SaveChanges();
 
-            context.MatchTypes.Add(
-                new MatchType { TypeName="1v1"}
+            context.MatchTypes.AddRange(
+                new MatchType { TypeName="1v1"},
+                new MatchType { TypeName = "2v2" }
+                );
+            context.SaveChanges();
+
+            context.MatchStatuses.AddRange(
+                new MatchStatus { StatusName = "Planned"},
+                new MatchStatus { StatusName = "Playing" },
+                new MatchStatus { StatusName = "Played" },
+                new MatchStatus { StatusName = "Cancelled" }
                 );
             context.SaveChanges();
 
             context.Tournaments.Add(
-                new Tournament { Edition = "Doomsday 2020"}
+                new Tournament { Edition = "Doomsday 2020", Match_Count = 16, Winner = ""}
                 );
             context.SaveChanges();
 
             context.Competitions.Add(
-                new Competition { TournamentID = 1, Name="Eerste klasse"}
+                new Competition { Name="Eerste klasse"}
                 );
+            context.SaveChanges();
 
             context.Matches.Add(
-                new Match { Date = new DateTime(2020,12,27), Score1 = 1, Score2 = 2, TableID = 1, MatchTypeID = 1, CompetitionID = 1, Player1ID = 1, Player2ID = 2 }
+                new Match { Date = new DateTime(2020,12,27), Score1 = 1, Score2 = 2, TableID = 1, MatchTypeID = 1, CompetitionID = 1, Player1ID = 1, Player2ID = 2, MatchStatusID = 1 }
                 );
             context.SaveChanges();
 
