@@ -30,7 +30,7 @@ namespace SoccerCASTBackEnd.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Tournament>> GetTournament(int id)
         {
-            var tournament = await _context.Tournaments.SingleOrDefaultAsync(id);
+            var tournament = await _context.Tournaments.SingleOrDefaultAsync(t => t.TournamentID == id);
             if (tournament == null)
             {
                 return NotFound();
