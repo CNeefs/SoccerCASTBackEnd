@@ -27,25 +27,21 @@ namespace SoccerCASTBackEnd.Controllers
 
 
         }
-        [HttpGet("/UserTeams{id}")]
+
+        [HttpGet("/UserTeams/{id}")]
         public async Task<ActionResult<IEnumerable<Team>>> GetUserTeams(int id)
         {
-            List<Team> teams = null;
-            var userteams = await _context.UserTeam.Where(ut => ut.UserID == id).ToListAsync();
-            if (userteams == null)
-            {
-                return NotFound();
-            }
+            return await _context.UserTeam.Where(ut => ut.UserID == id)
+                .Select(ut => ut.Team)
+                .ToListAsync();
+        }
 
-            foreach(var userteam in userteams)
-            {
-                Team tempTeam = await _context.Teams.SingleOrDefaultAsync(teams => teams.TeamID == userteam.TeamID);
-                teams.Add(tempTeam);
-            }
-
-            return await teams;
-            
-            
+        [HttpGet("/TeamUsers/{id}")]
+        public async Task<ActionResult<IEnumerable<User>>> GetTeamUsers(int id)
+        {
+            return await _context.UserTeam.Where(ut=> ut.TeamID == id)
+                .Select(u=> u.User)
+                .ToListAsync();
         }
 
         [HttpPost]

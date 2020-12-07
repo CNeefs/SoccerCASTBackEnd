@@ -47,7 +47,7 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.Tournaments.Add(
-                new Tournament { Edition = "Doomsday 2020", Match_Count = 16, Winner = ""}
+                new Tournament { Edition = "Doomsday 2020", Match_Count = 16}
                 );
             context.SaveChanges();
 
