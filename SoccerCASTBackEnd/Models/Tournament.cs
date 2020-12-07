@@ -10,6 +10,6 @@ namespace SoccerCASTBackEnd.Models
         public int TournamentID { get; set; }
         public string Edition { get; set; }
         public int Match_Count { get; set; }
-        public string Winner { get; set; }
+        public string? Winner { get; set; }
     }
 }
