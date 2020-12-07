@@ -25,6 +25,10 @@ namespace SoccerCASTBackEnd.Models
         public User Player1 { get; set; }
         public int? Player2ID { get; set; }
         public User Player2 { get; set; }
+        public int? Player3ID { get; set; }
+        public User Player3 { get; set; }
+        public int? Player4ID { get; set; }
+        public User Player4 { get; set; }
         public int MatchStatusID { get; set; }
         public MatchStatus MatchStatus { get; set; }
         public int? CompetitionID { get; set; }

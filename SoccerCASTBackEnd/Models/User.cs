@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SoccerCASTBackEnd.Models {
@@ -18,8 +19,11 @@ namespace SoccerCASTBackEnd.Models {
         public int TimesWon { get; set; }
         public int TimesLost { get; set; }
 
-        //Relations
-        public int RoleID { get; set; }
-        public Role Role { get; set; }
+        [NotMapped]
+        [JsonIgnore]
+        public List<Role> Roles { get; set; }
+
+        [NotMapped]
+        public List<string> Permissions { get; set; }
     }
 }
