@@ -18,8 +18,5 @@ namespace SoccerCASTBackEnd.Models {
         public int TimesWon { get; set; }
         public int TimesLost { get; set; }
 
-        //Relations
-        public int RoleID { get; set; }
-        public Role Role { get; set; }
     }
 }

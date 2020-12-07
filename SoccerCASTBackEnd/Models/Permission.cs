@@ -5,13 +5,9 @@ using System.Threading.Tasks;
 
 namespace SoccerCASTBackEnd.Models
 {
-    public class Role
+    public class Permission
     {
-        public int RoleID { get; set; }
-        public string Name { get; set; }
-
-        //relations
         public int PermissionID { get; set; }
-        public Permission Permission{get;set;}
+        public string Name { get; set; }
     }
 }
