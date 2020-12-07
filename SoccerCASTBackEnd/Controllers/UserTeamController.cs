@@ -29,41 +29,17 @@ namespace SoccerCASTBackEnd.Controllers
         }
 
         [HttpGet("/UserTeams/{id}")]
-        public async Task<ActionResult<IEnumerable<Team>>> GetUserTeams(int id)
+        public async Task<ActionResult<IEnumerable<UserTeam>>> GetUserTeams(int id)
         {
-            List<Team> teams = null;
-            var userteams = await _context.UserTeam.Where(ut => ut.UserID == id).ToListAsync();
-            if (userteams == null)
-            {
-                return NotFound();
-            }
-
-            foreach(var userteam in userteams)
-            {
-                Team tempTeam = await _context.Teams.SingleOrDefaultAsync(teams => teams.TeamID == userteam.TeamID);
-                teams.Add(tempTeam);
-            }
-
-            return teams;
+            return await _context.UserTeam.Where(ut => ut.UserID == id).Include(ut => ut.Team).ToListAsync();
         }
 
         [HttpGet("/TeamUsers/{id}")]
-        public async Task<ActionResult<IEnumerable<User>>> GetTeamUsers(int id)
+        public async Task<ActionResult<IEnumerable<UserTeam>>> GetTeamUsers(int id)
         {
-            List<User> users = null;
-            var userteams = await _context.UserTeam.Where(ut => ut.TeamID == id).ToListAsync();
-            if (userteams == null)
-            {
-                return NotFound();
-            }
-
-            foreach (var userteam in userteams)
-            {
-                User tempUser = await _context.Users.SingleOrDefaultAsync(u => u.UserID == userteam.UserID);
-                users.Add(tempUser);
-            }
-
-            return users;
+            return await _context.UserTeam.Where(ut=> ut.TeamID == id)
+                .Include(ut => ut.User)
+                .ToListAsync();
         }
 
         [HttpPost]
