@@ -91,5 +91,40 @@ namespace SoccerCASTBackEnd.Controllers
         {
             return _context.Competitions.Any(c => c.CompetitionID == id);
         }
+
+        [HttpPut("active/{id}")]
+        public async Task<ActionResult<Competition>> SetActive(int id, Competition competition)
+        {
+            if (id != competition.CompetitionID)
+            {
+                return BadRequest();
+            }
+
+            var competitions = await _context.Competitions.Where(c => c.isActive == true).Where(c => c.CompetitionID != id).ToListAsync();
+            foreach (var deactivateCompetition in competitions)
+            {
+                deactivateCompetition.isActive = false;
+                _context.Entry(deactivateCompetition).State = EntityState.Modified;
+            }
+
+            _context.Entry(competition).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CompetitionExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return NoContent();
+        }
     }
 }
