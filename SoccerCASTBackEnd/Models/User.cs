@@ -19,5 +19,11 @@ namespace SoccerCASTBackEnd.Models {
         public int TimesWon { get; set; }
         public int TimesLost { get; set; }
 
+        [NotMapped]
+        [JsonIgnore]
+        public List<Role> Roles { get; set; }
+
+        [NotMapped]
+        public List<string> Permissions { get; set; }
     }
 }

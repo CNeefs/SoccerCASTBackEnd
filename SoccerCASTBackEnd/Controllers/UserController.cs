@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using SoccerCASTBackEnd.Data;
 using SoccerCASTBackEnd.Models;
 using SoccerCASTBackEnd.Services;
@@ -49,13 +50,23 @@ namespace SoccerCASTBackEnd.Controllers {
         }
 
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] User userParam)
+        public async Task<IActionResult> AuthenticateAsync([FromBody] User userParam)
         {
             var user = _userService.Authenticate(userParam.Email, userParam.Password);
 
             if (user == null)
+            {
                 return BadRequest(new { message = "Email or password is incorrect" });
+            }
 
+            user.Roles = await _context.UserRoles.Where(ur=>ur.UserID == user.UserID).Include(ur => ur.Role).Select(ur => ur.Role).ToListAsync();
+
+            foreach (Role role in user.Roles)
+            {
+                user.Permissions = await _context.RolePermissions.Include(rp => rp.Permission).Where(rp => rp.RoleID == role.RoleID).Select(rp => rp.Permission).Select(p=>p.Name).ToListAsync();
+            }
+
+            
             return Ok(user);
         }
 
