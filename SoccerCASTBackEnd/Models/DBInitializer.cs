@@ -21,26 +21,70 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.Permissions.AddRange(
-                new Permission { Name = "createTable"},
-                new Permission { Name = "updateTable" },
-                new Permission { Name = "deleteTable" },
-                new Permission { Name = "editTable" },
-                new Permission { Name = "createMatch" },
-                new Permission { Name = "updateMatch" },
-                new Permission { Name = "deleteMatch" },
-                new Permission { Name = "updateMatch" }
+                new Permission { Name = "TABLE_MANAGE" },
+                new Permission { Name = "TABLE_CREATE" },
+                new Permission { Name = "TABLE_EDIT" },
+                new Permission { Name = "TABLE_VIEW" },
+                new Permission { Name = "COMPETITION_MANAGE" },
+                new Permission { Name = "COMPETITION_CREATE" },
+                new Permission { Name = "COMPETITION_EDIT" },
+                new Permission { Name = "COMPETITIONE_VIEW" },
+                new Permission { Name = "USER_MANAGE" },
+                new Permission { Name = "USER_CREATE" },
+                new Permission { Name = "USER_EDIT" },
+                new Permission { Name = "USER_VIEW" },
+                new Permission { Name = "TOURNAMENT_MANAGE" },
+                new Permission { Name = "TOURNAMENT_CREATE" },
+                new Permission { Name = "TOURNAMENT_EDIT" },
+                new Permission { Name = "TOURNAMENT_VIEW" },
+                new Permission { Name = "TOURNAMENT_JOIN" },
+                new Permission { Name = "TEAM_MANAGE" },
+                new Permission { Name = "TEAM_EDIT" },
+                new Permission { Name = "TEAM_ADD" },
+                new Permission { Name = "TEAM_VIEW" },
+                new Permission { Name = "PROFILE_VIEW" },
+                new Permission { Name = "PROFILE_EDIT" },
+                new Permission { Name = "MATCH_START" },
+                new Permission { Name = "MATCH_CHALLENGE" },
+                new Permission { Name = "MATCH_ACCEPT" }
                 );
             context.SaveChanges();
 
             context.RolePermissions.AddRange(
-                new RolePermission { PermissionID = 1, RoleID = 2},
+                new RolePermission { PermissionID = 1, RoleID = 2 },
                 new RolePermission { PermissionID = 2, RoleID = 2 },
                 new RolePermission { PermissionID = 3, RoleID = 2 },
                 new RolePermission { PermissionID = 4, RoleID = 2 },
                 new RolePermission { PermissionID = 5, RoleID = 2 },
                 new RolePermission { PermissionID = 6, RoleID = 2 },
                 new RolePermission { PermissionID = 7, RoleID = 2 },
-                new RolePermission { PermissionID = 8, RoleID = 2 }
+                new RolePermission { PermissionID = 8, RoleID = 2 },
+                new RolePermission { PermissionID = 9, RoleID = 2 },
+                new RolePermission { PermissionID = 10, RoleID = 2 },
+                new RolePermission { PermissionID = 11, RoleID = 2 },
+                new RolePermission { PermissionID = 12, RoleID = 2 },
+                new RolePermission { PermissionID = 13, RoleID = 2 },
+                new RolePermission { PermissionID = 14, RoleID = 2 },
+                new RolePermission { PermissionID = 15, RoleID = 2 },
+                new RolePermission { PermissionID = 16, RoleID = 2 },
+                new RolePermission { PermissionID = 17, RoleID = 2 },
+                new RolePermission { PermissionID = 17, RoleID = 1 },
+                new RolePermission { PermissionID = 18, RoleID = 2 },
+                new RolePermission { PermissionID = 19, RoleID = 2 },
+                new RolePermission { PermissionID = 19, RoleID = 1 },
+                new RolePermission { PermissionID = 20, RoleID = 2 },
+                new RolePermission { PermissionID = 20, RoleID = 1 },
+                new RolePermission { PermissionID = 21, RoleID = 2 },
+                new RolePermission { PermissionID = 22, RoleID = 2 },
+                new RolePermission { PermissionID = 22, RoleID = 1 },
+                new RolePermission { PermissionID = 23, RoleID = 2 },
+                new RolePermission { PermissionID = 23, RoleID = 1 },
+                new RolePermission { PermissionID = 24, RoleID = 2 },
+                new RolePermission { PermissionID = 24, RoleID = 1 },
+                new RolePermission { PermissionID = 25, RoleID = 2 },
+                new RolePermission { PermissionID = 25, RoleID = 1 },
+                new RolePermission { PermissionID = 26, RoleID = 2 },
+                new RolePermission { PermissionID = 26, RoleID = 1 }
                 );
             context.SaveChanges();
 
@@ -51,8 +95,9 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.UserRoles.AddRange(
-                new UserRole { UserID = 1, RoleID = 2},
-                new UserRole { UserID = 2, RoleID = 1}
+                new UserRole { UserID = 1, RoleID = 2 },
+                new UserRole { UserID = 1, RoleID = 1 },
+                new UserRole { UserID = 2, RoleID = 1 }
                 );
             context.SaveChanges();
 
