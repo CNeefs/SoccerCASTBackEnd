@@ -28,7 +28,18 @@ namespace SoccerCASTBackEnd.Controllers {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.Include(u => u.Roles).ToListAsync();
+            var users = await _context.Users.ToListAsync();
+            foreach(var user in users)
+            {
+                var userRoles = await _context.UserRoles.Where(x => x.UserID == user.UserID).ToListAsync();
+                var roles = new List<int>();
+                foreach (var userRole in userRoles)
+                {
+                    roles.Add(_context.Roles.Where(x => x.RoleID == userRole.RoleID).SingleOrDefault().RoleID);
+                }
+                user.Roles = await _context.Roles.Where(x => roles.Contains(x.RoleID)).ToListAsync();
+            }
+            return await _context.Users.ToListAsync();
         }
 
         [HttpPost]
@@ -44,6 +55,12 @@ namespace SoccerCASTBackEnd.Controllers {
             }
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+            UserRole userRole = new UserRole();
+            userRole.UserRoleID = 0;
+            userRole.UserID = user.UserID;
+            userRole.RoleID = 1;
+            _context.UserRoles.Add(userRole);
             await _context.SaveChangesAsync();
 
             return Ok(user);
