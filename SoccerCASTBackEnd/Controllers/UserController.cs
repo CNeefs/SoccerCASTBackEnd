@@ -56,11 +56,17 @@ namespace SoccerCASTBackEnd.Controllers {
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            UserRole userRole = new UserRole();
-            userRole.UserRoleID = 0;
-            userRole.UserID = user.UserID;
-            userRole.RoleID = 1;
-            _context.UserRoles.Add(userRole);
+            if (user.Roles != null)
+            {
+                foreach (var role in user.Roles)
+                {
+                    UserRole userRole = new UserRole();
+                    userRole.UserRoleID = 0;
+                    userRole.UserID = user.UserID;
+                    userRole.RoleID = role.RoleID;
+                    _context.UserRoles.Add(userRole);
+                }
+            }
             await _context.SaveChangesAsync();
 
             return Ok(user);
@@ -96,33 +102,18 @@ namespace SoccerCASTBackEnd.Controllers {
             {
                 return BadRequest();
             }
+            _context.UserRoles.RemoveRange(_context.UserRoles.Where(ur => ur.UserID == user.UserID).ToList());
+            foreach (var role in user.Roles)
+            {
+                UserRole userRole = new UserRole();
+                userRole.UserRoleID = 0;
+                userRole.UserID = user.UserID;
+                userRole.RoleID = role.RoleID;
+                _context.UserRoles.Add(userRole);
+            }
+            await _context.SaveChangesAsync();
 
             _context.Entry(user).State = EntityState.Modified;
-            var rolesList = new List<int>();
-            foreach (var role in user.Roles)
-            {
-                rolesList.Add(role.RoleID);
-            }
-            var deleteRole = _context.UserRoles.Where(r => !rolesList.Contains(r.RoleID) && r.UserID == user.UserID).ToList();
-            if (deleteRole != null)
-            {
-                foreach (var role in deleteRole)
-                {
-                    _context.UserRoles.Remove(role);
-                }
-            }
-            foreach (var role in user.Roles)
-            {
-                var alreadyExistsRoles = _context.UserRoles.Where(r => r.RoleID == role.RoleID && r.UserID == user.UserID).SingleOrDefault();
-                if (alreadyExistsRoles == null)
-                {
-                    UserRole userRole = new UserRole();
-                    userRole.UserRoleID = 0;
-                    userRole.UserID = user.UserID;
-                    userRole.RoleID = role.RoleID;
-                    _context.UserRoles.Add(userRole);
-                }
-            }
 
             try
             {
@@ -155,7 +146,7 @@ namespace SoccerCASTBackEnd.Controllers {
             {
                 return NotFound();
             }
-
+            _context.UserRoles.RemoveRange(_context.UserRoles.Where(ur => ur.UserID == user.UserID).ToList());
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
