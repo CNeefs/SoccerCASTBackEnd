@@ -20,7 +20,6 @@ namespace SoccerCASTBackEnd.Models {
         public int TimesLost { get; set; }
 
         [NotMapped]
-        [JsonIgnore]
         public List<Role> Roles { get; set; }
 
         [NotMapped]
