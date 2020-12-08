@@ -41,6 +41,12 @@ namespace SoccerCASTBackEnd.Services {
                 user.Permissions = _soccerContext.RolePermissions.Include(rp => rp.Permission).Where(rp => rp.RoleID == role.RoleID).Select(rp => rp.Permission).Select(p => p.Name).Distinct().ToList();
             }
 
+            var permissionsString = "";
+            foreach(var permission in user.Permissions)
+            {
+                permissionsString += permission + ";";
+            }
+
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -54,7 +60,7 @@ namespace SoccerCASTBackEnd.Services {
                     new Claim("BirthDay", user.BirthDate.ToString()),
                     new Claim("TimesLost", user.TimesLost.ToString()),
                     new Claim("TimesWon", user.TimesWon.ToString()),
-                    new Claim("Permissions", user.Permissions.ToString())
+                    new Claim("Permissions", permissionsString.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
