@@ -38,7 +38,7 @@ namespace SoccerCASTBackEnd {
 
             services.AddDbContext<SoccerContext>(opt =>
                 opt.UseSqlServer(
-                    Configuration.GetConnectionString("OnlineConnection")
+                    Configuration.GetConnectionString("DefaultConnection")
                     )
                 );
 
