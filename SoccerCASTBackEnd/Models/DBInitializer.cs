@@ -28,7 +28,7 @@ namespace SoccerCASTBackEnd.Models {
                 new Permission { Name = "COMPETITION_MANAGE", RoleID = 2 },
                 new Permission { Name = "COMPETITION_CREATE", RoleID = 2 },
                 new Permission { Name = "COMPETITION_EDIT", RoleID = 2 },
-                new Permission { Name = "COMPETITIONE_VIEW", RoleID = 2 },
+                new Permission { Name = "COMPETITION_VIEW", RoleID = 2 },
                 new Permission { Name = "USER_MANAGE", RoleID = 2 },
                 new Permission { Name = "USER_CREATE", RoleID = 2 },
                 new Permission { Name = "USER_EDIT", RoleID = 2 },
