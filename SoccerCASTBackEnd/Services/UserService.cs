@@ -33,6 +33,14 @@ namespace SoccerCASTBackEnd.Services {
             if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
                 return null;
 
+            user.Roles = _soccerContext.UserRoles.Where(ur => ur.UserID == user.UserID).Include(ur => ur.Role).Select(ur => ur.Role).ToList();
+
+
+            foreach (Role role in user.Roles)
+            {
+                user.Permissions = _soccerContext.RolePermissions.Include(rp => rp.Permission).Where(rp => rp.RoleID == role.RoleID).Select(rp => rp.Permission).Select(p => p.Name).Distinct().ToList();
+            }
+
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
