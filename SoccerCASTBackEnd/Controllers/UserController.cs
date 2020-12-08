@@ -63,8 +63,10 @@ namespace SoccerCASTBackEnd.Controllers {
 
             foreach (Role role in user.Roles)
             {
-                user.Permissions = await _context.RolePermissions.Include(rp => rp.Permission).Where(rp => rp.RoleID == role.RoleID).Select(rp => rp.Permission).Select(p=>p.Name).ToListAsync();
+                user.Permissions.AddRange(await _context.RolePermissions.Include(rp => rp.Permission).Where(rp => rp.RoleID == role.RoleID).Select(rp => rp.Permission).Select(p=>p.Name).ToListAsync());
             }
+
+            user.Permissions = (List<string>) user.Permissions.Distinct();
 
             
             return Ok(user);
