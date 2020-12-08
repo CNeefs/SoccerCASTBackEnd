@@ -66,11 +66,6 @@ namespace SoccerCASTBackEnd.Data {
             modelBuilder.Entity<Team>()
                 .ToTable("Teams");
 
-            modelBuilder.Entity<Team>()
-                .HasOne(t => t.Captain)
-                .WithMany()
-                .OnDelete(DeleteBehavior.SetNull);
-
             modelBuilder.Entity<Match>()
                 .ToTable("Matches");
 
@@ -87,7 +82,7 @@ namespace SoccerCASTBackEnd.Data {
             modelBuilder.Entity<Match>()
                 .HasOne(m => m.MatchType)
                 .WithMany()
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Match>()
                 .HasOne(m => m.MatchStatus)
@@ -104,11 +99,6 @@ namespace SoccerCASTBackEnd.Data {
 
             modelBuilder.Entity<Table>()
                 .ToTable("Tables");
-
-            modelBuilder.Entity<Table>()
-                .HasOne(t => t.ContactUser)
-                .WithMany()
-                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<UserTeam>()
                 .ToTable("UserTeam");
