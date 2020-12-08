@@ -38,7 +38,9 @@ namespace SoccerCASTBackEnd {
 
             services.AddDbContext<SoccerContext>(opt =>
                 opt.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("OnlineConnection")
+                    )
+                );
 
             services.AddSwaggerGen(c => { 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {

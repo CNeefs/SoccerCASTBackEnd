@@ -38,7 +38,7 @@ namespace SoccerCASTBackEnd.Services {
 
             foreach (Role role in user.Roles)
             {
-                user.Permissions = _soccerContext.RolePermissions.Include(rp => rp.Permission).Where(rp => rp.RoleID == role.RoleID).Select(rp => rp.Permission).Select(p => p.Name).Distinct().ToList();
+                user.Permissions = _soccerContext.Permissions.Where(rp => rp.RoleID == role.RoleID).Select(p => p.Name).Distinct().ToList();
             }
 
             var permissionsString = "";

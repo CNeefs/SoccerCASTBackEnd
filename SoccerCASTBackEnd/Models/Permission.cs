@@ -11,5 +11,8 @@ namespace SoccerCASTBackEnd.Models
     {
         public int PermissionID { get; set; }
         public string Name { get; set; }
+        //relations
+        public int RoleID { get; set; }
+        public Role Role { get; set; }
     }
 }

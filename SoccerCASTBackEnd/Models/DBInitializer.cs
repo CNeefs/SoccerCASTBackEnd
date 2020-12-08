@@ -50,44 +50,6 @@ namespace SoccerCASTBackEnd.Models {
                 );
             context.SaveChanges();
 
-            context.RolePermissions.AddRange(
-                new RolePermission { PermissionID = 1, RoleID = 2 },
-                new RolePermission { PermissionID = 2, RoleID = 2 },
-                new RolePermission { PermissionID = 3, RoleID = 2 },
-                new RolePermission { PermissionID = 4, RoleID = 2 },
-                new RolePermission { PermissionID = 5, RoleID = 2 },
-                new RolePermission { PermissionID = 6, RoleID = 2 },
-                new RolePermission { PermissionID = 7, RoleID = 2 },
-                new RolePermission { PermissionID = 8, RoleID = 2 },
-                new RolePermission { PermissionID = 9, RoleID = 2 },
-                new RolePermission { PermissionID = 10, RoleID = 2 },
-                new RolePermission { PermissionID = 11, RoleID = 2 },
-                new RolePermission { PermissionID = 12, RoleID = 2 },
-                new RolePermission { PermissionID = 13, RoleID = 2 },
-                new RolePermission { PermissionID = 14, RoleID = 2 },
-                new RolePermission { PermissionID = 15, RoleID = 2 },
-                new RolePermission { PermissionID = 16, RoleID = 2 },
-                new RolePermission { PermissionID = 17, RoleID = 2 },
-                new RolePermission { PermissionID = 17, RoleID = 1 },
-                new RolePermission { PermissionID = 18, RoleID = 2 },
-                new RolePermission { PermissionID = 19, RoleID = 2 },
-                new RolePermission { PermissionID = 19, RoleID = 1 },
-                new RolePermission { PermissionID = 20, RoleID = 2 },
-                new RolePermission { PermissionID = 20, RoleID = 1 },
-                new RolePermission { PermissionID = 21, RoleID = 2 },
-                new RolePermission { PermissionID = 22, RoleID = 2 },
-                new RolePermission { PermissionID = 22, RoleID = 1 },
-                new RolePermission { PermissionID = 23, RoleID = 2 },
-                new RolePermission { PermissionID = 23, RoleID = 1 },
-                new RolePermission { PermissionID = 24, RoleID = 2 },
-                new RolePermission { PermissionID = 24, RoleID = 1 },
-                new RolePermission { PermissionID = 25, RoleID = 2 },
-                new RolePermission { PermissionID = 25, RoleID = 1 },
-                new RolePermission { PermissionID = 26, RoleID = 2 },
-                new RolePermission { PermissionID = 26, RoleID = 1 }
-                );
-            context.SaveChanges();
-
             context.Users.AddRange(
                 new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Peter", LastName = "Celie", Email = "player1@thomasmore.be", BirthDate = new DateTime(1969,5,4), TimesLost=0, TimesWon=0 },
                 new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Tom", LastName = "Aat", Email = "player2@thomasmore.be", BirthDate = new DateTime(1969, 11, 21), TimesLost = 0, TimesWon = 0 }

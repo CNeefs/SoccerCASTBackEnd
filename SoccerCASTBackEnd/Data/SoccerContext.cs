@@ -15,7 +15,6 @@ namespace SoccerCASTBackEnd.Data {
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; } 
         public DbSet<Role> Roles { get; set; }
-        public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Match> Matches { get; set; }
@@ -46,19 +45,6 @@ namespace SoccerCASTBackEnd.Data {
 
             modelBuilder.Entity<Role>()
                 .ToTable("Roles");
-
-            modelBuilder.Entity<RolePermission>()
-                .ToTable("RolePermissions");
-
-            modelBuilder.Entity<RolePermission>()
-                .HasOne(rp => rp.Role)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<RolePermission>()
-                .HasOne(rp => rp.Permission)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Permission>()
                 .ToTable("Permissions");
