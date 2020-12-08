@@ -66,14 +66,49 @@ namespace SoccerCASTBackEnd.Data {
             modelBuilder.Entity<Team>()
                 .ToTable("Teams");
 
+            modelBuilder.Entity<Team>()
+                .HasOne(t => t.Captain)
+                .WithMany()
+                .OnDelete(DeleteBehavior.SetNull);
+
             modelBuilder.Entity<Match>()
                 .ToTable("Matches");
+
+            modelBuilder.Entity<Match>()
+                .HasOne(m => m.Competition)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Match>()
+                .HasOne(m => m.Tournament)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Match>()
+                .HasOne(m => m.MatchType)
+                .WithMany()
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Match>()
+                .HasOne(m => m.MatchStatus)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Match>()
+                .HasOne(m => m.Table)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<MatchType>()
                 .ToTable("MatchTypes");
 
             modelBuilder.Entity<Table>()
                 .ToTable("Tables");
+
+            modelBuilder.Entity<Table>()
+                .HasOne(t => t.ContactUser)
+                .WithMany()
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<UserTeam>()
                 .ToTable("UserTeam");
