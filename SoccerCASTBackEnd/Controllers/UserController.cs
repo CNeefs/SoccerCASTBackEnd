@@ -162,13 +162,12 @@ namespace SoccerCASTBackEnd.Controllers {
                 return NotFound();
             }
 
-            var userRoles = await _context.UserRoles.Where(x => x.UserID == user.UserID).ToListAsync();
-            var roles = new List<int>();
-            foreach (var userRole in userRoles)
+            user.Roles = await _context.UserRoles.Where(ur => ur.UserID == user.UserID).Include(ur => ur.Role).Select(ur => ur.Role).ToListAsync();
+
+            foreach (Role role in user.Roles)
             {
-                roles.Add(_context.Roles.Where(x => x.RoleID == userRole.RoleID).SingleOrDefault().RoleID);
+                user.Permissions = await _context.Permissions.Where(rp => rp.RoleID == role.RoleID).Select(p => p.Name).Distinct().ToListAsync();
             }
-            user.Roles = await _context.Roles.Where(x => roles.Contains(x.RoleID)).ToListAsync();
 
             return user;
         }
