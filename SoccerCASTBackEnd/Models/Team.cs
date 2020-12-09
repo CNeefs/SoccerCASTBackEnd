@@ -16,5 +16,7 @@ namespace SoccerCASTBackEnd.Models
         //relations
         public int CaptainID { get; set; }
         public User Captain { get; set; }
+        public int TeamStatusID { get; set; }
+        public TeamStatus TeamStatus { get; set; }
     }
 }

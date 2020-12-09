@@ -40,6 +40,8 @@ namespace SoccerCASTBackEnd.Models {
                 new Permission { Name = "TOURNAMENT_JOIN", RoleID = 2 },
                 new Permission { Name = "TOURNAMENT_JOIN", RoleID = 1 },
                 new Permission { Name = "TEAM_MANAGE", RoleID = 2 },
+                new Permission { Name = "TEAM_CREATE", RoleID = 2 },
+                new Permission { Name = "TEAM_CREATE", RoleID = 1 },
                 new Permission { Name = "TEAM_EDIT", RoleID = 2 },
                 new Permission { Name = "TEAM_EDIT", RoleID = 1 },
                 new Permission { Name = "TEAM_ADD", RoleID = 2 },
@@ -106,14 +108,27 @@ namespace SoccerCASTBackEnd.Models {
                 );
             context.SaveChanges();
 
+            context.TeamStatuses.AddRange(
+                new TeamStatus { StatusName = "Closed" },
+                new TeamStatus { StatusName = "Review" },
+                new TeamStatus { StatusName = "Open" }
+                );
+            context.SaveChanges();
+
             context.Teams.Add(
-                new Team { TeamName = "First team", CaptainID = 1, Location = "Antwerpen", CompanyName = "Testbedrijf"}
+                new Team { TeamName = "First team", CaptainID = 1, Location = "Antwerpen", CompanyName = "Testbedrijf", TeamStatusID = 2}
+                );
+            context.SaveChanges();
+
+            context.UserTeamStatuses.AddRange(
+                new UserTeamStatus { StatusName = "In Review" },
+                new UserTeamStatus { StatusName = "Accepted" }
                 );
             context.SaveChanges();
 
             context.UserTeam.AddRange(
-                new UserTeam { TeamID = 1, UserID = 2},
-                new UserTeam { TeamID = 1, UserID = 1}
+                new UserTeam { TeamID = 1, UserID = 2, UserTeamStatusID = 2},
+                new UserTeam { TeamID = 1, UserID = 1, UserTeamStatusID = 1}
                 );
             context.SaveChanges();
         }
