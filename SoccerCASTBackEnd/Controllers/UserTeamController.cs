@@ -53,8 +53,8 @@ namespace SoccerCASTBackEnd.Controllers
         }
 
 
-        [HttpPost("Aprove")]
-        public async Task<ActionResult<UserTeam>> AproveUser(UserTeam userteam)
+        [HttpPost("Approve")]
+        public async Task<ActionResult<UserTeam>> ApproveUser(UserTeam userteam)
         {
             var approvedUserTeam = _context.UserTeam.Where(ut => ut.TeamID == userteam.TeamID && ut.UserID == userteam.UserID).SingleOrDefault();
             approvedUserTeam.UserTeamStatusID = userteam.UserTeamStatusID;
@@ -63,18 +63,28 @@ namespace SoccerCASTBackEnd.Controllers
             return NoContent();
         }
 
-        [HttpDelete("User/{userID}/Team/{teamID}")]
+
+        [HttpPost("Decline")]
+        public async Task<ActionResult<UserTeam>> DeclineUser(UserTeam userteam)
+        {
+            var approvedUserTeam = _context.UserTeam.Where(ut => ut.TeamID == userteam.TeamID && ut.UserID == userteam.UserID).SingleOrDefault();
+            _context.UserTeam.Remove(approvedUserTeam);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("Decline/User/{userID}/Team/{teamID}")]
         public async Task<ActionResult<UserTeam>> DeleteUserTeam(int userID, int teamID)
         {
-            var userteam = await _context.UserTeam.SingleOrDefaultAsync(ut => ut.UserID == userID && ut.TeamID == teamID);
-            if (userteam == null)
+            var declinedUserTeam = _context.UserTeam.Where(ut => ut.TeamID == teamID && ut.UserID == userID).SingleOrDefault();
+            if (declinedUserTeam == null)
             {
                 return NotFound();
             }
 
-            _context.UserTeam.Remove(userteam);
+            _context.UserTeam.Remove(declinedUserTeam);
             await _context.SaveChangesAsync();
-            return userteam;
+            return declinedUserTeam;
         }
 
         [HttpDelete("{id}")]
