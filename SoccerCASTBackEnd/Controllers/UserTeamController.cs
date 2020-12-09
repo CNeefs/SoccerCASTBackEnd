@@ -36,11 +36,11 @@ namespace SoccerCASTBackEnd.Controllers
                 .ToListAsync();
         }
 
-        [HttpGet("TeamUsers/{id}")]
-        public async Task<ActionResult<IEnumerable<User>>> GetTeamUsers(int id)
+        [HttpGet("TeamUsers/{id}/{status}")]
+        public async Task<ActionResult<IEnumerable<User>>> GetTeamUsers(int id, int status)
         {
-            return await _context.UserTeam.Where(ut=> ut.TeamID == id)
-                .Select(u=> u.User)
+            return await _context.UserTeam.Where(ut => ut.TeamID == id && ut.UserTeamStatusID == status)
+                .Select(u => u.User)
                 .ToListAsync();
         }
 
@@ -50,6 +50,17 @@ namespace SoccerCASTBackEnd.Controllers
             _context.UserTeam.Add(userteam);
             await _context.SaveChangesAsync();
             return Ok(userteam);
+        }
+
+
+        [HttpPost("Aprove")]
+        public async Task<ActionResult<UserTeam>> AproveUser(UserTeam userteam)
+        {
+            var approvedUserTeam = _context.UserTeam.Where(ut => ut.TeamID == userteam.TeamID && ut.UserID == userteam.UserID).SingleOrDefault();
+            approvedUserTeam.UserTeamStatusID = userteam.UserTeamStatusID;
+            _context.Entry(approvedUserTeam).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         [HttpDelete("User/{userID}/Team/{teamID}")]
