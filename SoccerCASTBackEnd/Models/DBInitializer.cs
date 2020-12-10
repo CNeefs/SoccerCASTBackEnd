@@ -57,13 +57,15 @@ namespace SoccerCASTBackEnd.Models {
                 new Permission { Name = "MATCH_CHALLENGE", RoleID = 2 },
                 new Permission { Name = "MATCH_CHALLENGE", RoleID = 1 },
                 new Permission { Name = "MATCH_ACCEPT", RoleID = 2 },
-                new Permission { Name = "MATCH_ACCEPT", RoleID = 1 }
+                new Permission { Name = "MATCH_ACCEPT", RoleID = 1 },
+                new Permission { Name = "RANKING_VIEW", RoleID = 2 },
+                new Permission { Name = "RANKING_VIEW", RoleID = 1 }
                 );
             context.SaveChanges();
 
             context.Users.AddRange(
                 new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Peter", LastName = "Celie", Email = "player1@thomasmore.be", BirthDate = new DateTime(1969,5,4), TimesLost=0, TimesWon=0 },
-                new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Tom", LastName = "Aat", Email = "player2@thomasmore.be", BirthDate = new DateTime(1969, 11, 21), TimesLost = 0, TimesWon = 0 }
+                new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Tom", LastName = "Aat", Email = "player2@thomasmore.be", BirthDate = new DateTime(1969, 11, 21), TimesLost = 2, TimesWon = 5 }
             );
             context.SaveChanges();
 
