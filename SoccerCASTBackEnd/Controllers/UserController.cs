@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -18,10 +19,12 @@ namespace SoccerCASTBackEnd.Controllers {
 
         private IUserService _userService;
         private readonly SoccerContext _context;
+        private IBlobService _blobService;
 
-        public UserController(IUserService userService, SoccerContext context) {
+        public UserController(IUserService userService, SoccerContext context, IBlobService blobService) {
             _userService = userService;
             _context = context;
+            _blobService = blobService;
         }
 
         [Authorize]
@@ -36,7 +39,7 @@ namespace SoccerCASTBackEnd.Controllers {
             return await _context.Users.ToListAsync();
         }
 
-        [HttpPost]
+        [HttpPost, DisableRequestSizeLimit]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             var users = await _context.Users.ToListAsync();
@@ -86,7 +89,7 @@ namespace SoccerCASTBackEnd.Controllers {
             return Ok(user);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), DisableRequestSizeLimit]
         public async Task<ActionResult<User>> PutUser(int id, User user)
         {
             if (id != user.UserID)
@@ -103,7 +106,6 @@ namespace SoccerCASTBackEnd.Controllers {
                 _context.UserRoles.Add(userRole);
             }
             await _context.SaveChangesAsync();
-
             _context.Entry(user).State = EntityState.Modified;
 
             try
@@ -122,6 +124,46 @@ namespace SoccerCASTBackEnd.Controllers {
                 }
             }
             return NoContent();
+        }
+
+        [HttpPost("{id}/upload"), DisableRequestSizeLimit]
+        public async Task<ActionResult> UploadProfilePicture(int id)
+        {
+            var user = _context.Users.Find(id);
+            IFormFile file = Request.Form.Files[0];
+            if (file == null)
+            {
+                return BadRequest();
+            }
+
+            var result = await _blobService.UploadFileBlobAsync(
+                    "firstcontainer",
+                    file.OpenReadStream(),
+                    file.ContentType,
+                    file.FileName);
+
+            var toReturn = result.AbsoluteUri;
+            user.ImagePath = toReturn;
+
+            _context.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(new { path = toReturn });
         }
 
         private bool UserExists(int id)
