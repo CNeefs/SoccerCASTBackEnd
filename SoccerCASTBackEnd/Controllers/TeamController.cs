@@ -41,6 +41,12 @@ namespace SoccerCASTBackEnd.Controllers
         {
             _context.Teams.Add(team);
             await _context.SaveChangesAsync();
+            UserTeam userTeam = new UserTeam();
+            userTeam.TeamID = team.TeamID;
+            userTeam.UserID = team.CaptainID;
+            userTeam.UserTeamStatusID = 1;
+            _context.UserTeam.Add(userTeam);
+            await _context.SaveChangesAsync();
             return Ok(team);
         }
 
@@ -71,6 +77,8 @@ namespace SoccerCASTBackEnd.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Team>> DeleteTeam(int id)
         {
+            _context.UserTeam.RemoveRange(_context.UserTeam.Where(ut => ut.TeamID == id).ToList());
+            await _context.SaveChangesAsync();
             var team = await _context.Teams.FindAsync(id);
             if (team == null)
             {
