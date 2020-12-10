@@ -28,10 +28,10 @@ namespace SoccerCASTBackEnd.Controllers
 
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<UserTeam>>> UserTeams(int id)
+        [HttpGet("{userid}/{teamid}")]
+        public async Task<ActionResult<UserTeam>> UserTeams(int userid, int teamid)
         {
-            return await _context.UserTeam.Where(ut => ut.UserID == id).ToListAsync();
+            return _context.UserTeam.Where(ut => ut.UserID == userid && ut.TeamID == teamid).SingleOrDefault();
         }
 
         [HttpGet("UserTeams/{id}")]
