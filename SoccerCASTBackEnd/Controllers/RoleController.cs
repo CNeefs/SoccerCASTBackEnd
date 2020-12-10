@@ -26,6 +26,15 @@ namespace SoccerCASTBackEnd.Controllers
             return await _context.Roles.ToListAsync();
         }
 
-
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Role>> GetRole(int id)
+        {
+            var role = await _context.Roles.SingleOrDefaultAsync(r => r.RoleID == id);
+            if (role == null)
+            {
+                return NotFound();
+            }
+            return role;
+        }
     }
 }
