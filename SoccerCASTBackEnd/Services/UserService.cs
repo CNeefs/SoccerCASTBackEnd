@@ -53,7 +53,8 @@ namespace SoccerCASTBackEnd.Services {
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("UserID", user.UserID.ToString())
+                    new Claim("UserID", user.UserID.ToString()),
+                    new Claim("Permissions", permissionsString)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

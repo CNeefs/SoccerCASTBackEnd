@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -18,5 +19,8 @@ namespace SoccerCASTBackEnd.Models
         public User Captain { get; set; }
         public int TeamStatusID { get; set; }
         public TeamStatus TeamStatus { get; set; }
+
+        [NotMapped]
+        public List<User> Users { get; set; }
     }
 }

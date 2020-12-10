@@ -28,6 +28,12 @@ namespace SoccerCASTBackEnd.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<UserTeam>>> UserTeams(int id)
+        {
+            return await _context.UserTeam.Where(ut => ut.UserID == id).ToListAsync();
+        }
+
         [HttpGet("UserTeams/{id}")]
         public async Task<ActionResult<IEnumerable<Team>>> GetUserTeams(int id)
         {
