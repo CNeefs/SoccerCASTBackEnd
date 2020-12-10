@@ -77,7 +77,7 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.Tables.Add(
-                new Table { TableName = "Tafel 1", Locatie = "Molenstraat 21 2000 Antwerpen", ContactUserID = 1}
+                new Table { TableName = "Tafel 1", CompanyName = "Testbedrijf", Location = "Molenstraat 21 2000 Antwerpen", ContactUserID = 1}
                 );
             context.SaveChanges();
 
