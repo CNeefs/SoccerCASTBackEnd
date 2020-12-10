@@ -31,13 +31,7 @@ namespace SoccerCASTBackEnd.Controllers {
             var users = await _context.Users.ToListAsync();
             foreach(var user in users)
             {
-                var userRoles = await _context.UserRoles.Where(x => x.UserID == user.UserID).ToListAsync();
-                var roles = new List<int>();
-                foreach (var userRole in userRoles)
-                {
-                    roles.Add(_context.Roles.Where(x => x.RoleID == userRole.RoleID).SingleOrDefault().RoleID);
-                }
-                user.Roles = await _context.Roles.Where(x => roles.Contains(x.RoleID)).ToListAsync();
+                user.Roles = await _context.UserRoles.Where(ur => ur.UserID == user.UserID).Include(ur => ur.Role).Select(ur => ur.Role).ToListAsync();
             }
             return await _context.Users.ToListAsync();
         }
@@ -84,14 +78,11 @@ namespace SoccerCASTBackEnd.Controllers {
 
             user.Roles = await _context.UserRoles.Where(ur=>ur.UserID == user.UserID).Include(ur => ur.Role).Select(ur => ur.Role).ToListAsync();
 
-
             foreach (Role role in user.Roles)
             {
                 user.Permissions = await _context.Permissions.Where(rp => rp.RoleID == role.RoleID).Select(p=>p.Name).Distinct().ToListAsync();
             }
 
-
-            
             return Ok(user);
         }
 

@@ -22,14 +22,13 @@ namespace SoccerCASTBackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
         {
-            return await _context.Teams.Include(t => t.Captain).ToListAsync();
-
-
+            var teams = await _context.Teams.Include(t => t.Captain).Include(t => t.TeamStatus).ToListAsync();
+            return teams;
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id)
         {
-            var team = await _context.Teams.SingleOrDefaultAsync(t => t.TeamID == id);
+            var team = await _context.Teams.Include(t => t.Captain).Include(t => t.TeamStatus).SingleOrDefaultAsync(t => t.TeamID == id);
             if (team == null)
             {
                 return NotFound();
@@ -41,6 +40,30 @@ namespace SoccerCASTBackEnd.Controllers
         public async Task<ActionResult<Team>> PostTeam(Team team)
         {
             _context.Teams.Add(team);
+            await _context.SaveChangesAsync();
+            return Ok(team);
+        }
+
+        [HttpPost("join/{id}")]
+        public async Task<ActionResult<Team>> JoinTeam(int id, Team team)
+        {
+            UserTeam userTeam = new UserTeam();
+            userTeam.TeamID = team.TeamID;
+            userTeam.UserID = id;
+            userTeam.UserTeamStatusID = 1;
+            _context.UserTeam.Add(userTeam);
+            await _context.SaveChangesAsync();
+            return Ok(team);
+        }
+
+        [HttpPost("join/review/{id}")]
+        public async Task<ActionResult<Team>> JoinReviewTeam(int id, Team team)
+        {
+            UserTeam userTeam = new UserTeam();
+            userTeam.TeamID = team.TeamID;
+            userTeam.UserID = id;
+            userTeam.UserTeamStatusID = 2;
+            _context.UserTeam.Add(userTeam);
             await _context.SaveChangesAsync();
             return Ok(team);
         }

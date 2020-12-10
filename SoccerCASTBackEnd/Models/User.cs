@@ -23,6 +23,9 @@ namespace SoccerCASTBackEnd.Models {
         public List<Role> Roles { get; set; }
 
         [NotMapped]
+        public List<Team> Teams { get; set; }
+
+        [NotMapped]
         public List<string> Permissions { get; set; }
     }
 }
