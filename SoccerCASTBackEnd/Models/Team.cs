@@ -22,5 +22,7 @@ namespace SoccerCASTBackEnd.Models
 
         [NotMapped]
         public List<User> Users { get; set; }
+
+        public string ImagePath { get; set; }
     }
 }
