@@ -91,7 +91,9 @@ namespace SoccerCASTBackEnd.Models {
                 new MatchStatus { StatusName = "Planned"},
                 new MatchStatus { StatusName = "Playing" },
                 new MatchStatus { StatusName = "Played" },
-                new MatchStatus { StatusName = "Cancelled" }
+                new MatchStatus { StatusName = "Cancelled" },
+                new MatchStatus { StatusName = "Request" },
+                new MatchStatus { StatusName = "Accept" }
                 );
             context.SaveChanges();
 
