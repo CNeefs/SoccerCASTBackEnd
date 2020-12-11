@@ -101,6 +101,21 @@ namespace SoccerCASTBackEnd.Controllers
                 return BadRequest();
             }
 
+            if (team.TeamStatusID == 1)
+            {
+                var userteams = _context.UserTeam.Where(ut => ut.TeamID == team.TeamID).ToList();
+                foreach (var userteam in userteams)
+                {
+                    userteam.UserTeamStatusID = 1;
+                    _context.Entry(userteam).State = EntityState.Modified;
+                }
+            }
+
+            if (team.TeamStatusID == 3)
+            {
+                _context.UserTeam.RemoveRange(_context.UserTeam.Where(ut => ut.TeamID == team.TeamID && ut.UserTeamStatusID == 2));
+            }
+
             _context.Entry(team).State = EntityState.Modified;
 
             try
