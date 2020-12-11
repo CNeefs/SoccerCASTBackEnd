@@ -1,3 +1,4 @@
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,9 @@ namespace SoccerCASTBackEnd {
             services.AddCors(o => o.AddPolicy("MyPolicy", builder => { 
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); 
             }));
+
+            services.AddScoped(x => new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorage")));
+            services.AddScoped<IBlobService, BlobService>();
 
             services.AddControllers();
 

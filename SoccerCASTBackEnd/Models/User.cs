@@ -27,5 +27,7 @@ namespace SoccerCASTBackEnd.Models {
 
         [NotMapped]
         public List<string> Permissions { get; set; }
+
+        public string ImagePath { get; set; }
     }
 }
