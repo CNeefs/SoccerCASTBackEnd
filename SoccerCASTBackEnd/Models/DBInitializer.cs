@@ -120,7 +120,7 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.Teams.Add(
-                new Team { TeamName = "First team", CaptainID = 1, Location = "Antwerpen", CompanyName = "Testbedrijf", TeamStatusID = 2}
+                new Team { TeamName = "First team", CaptainID = 1, Location = "Antwerpen", CompanyName = "Testbedrijf", TeamStatusID = 2, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-team-picture.jpg" }
                 );
             context.SaveChanges();
 

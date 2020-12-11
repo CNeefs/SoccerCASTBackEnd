@@ -50,10 +50,7 @@ namespace SoccerCASTBackEnd.Controllers {
                     return BadRequest(new { message = "This email is already in use." });
                 }
             }
-            if(user.ImagePath == null)
-            {
-                user.ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp";
-            }            
+            user.ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp";          
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -93,7 +90,7 @@ namespace SoccerCASTBackEnd.Controllers {
             return Ok(user);
         }
 
-        [HttpPut("{id}"), DisableRequestSizeLimit]
+        [HttpPut("{id}")]
         public async Task<ActionResult<User>> PutUser(int id, User user)
         {
             if (id != user.UserID)

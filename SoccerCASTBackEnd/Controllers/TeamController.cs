@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SoccerCASTBackEnd.Data;
 using SoccerCASTBackEnd.Models;
+using SoccerCASTBackEnd.Services;
 
 namespace SoccerCASTBackEnd.Controllers
 {
@@ -15,9 +16,11 @@ namespace SoccerCASTBackEnd.Controllers
     public class TeamController : ControllerBase
     {
         private readonly SoccerContext _context;
-        public TeamController(SoccerContext context)
+        public IBlobService _blobService;
+        public TeamController(SoccerContext context, IBlobService blobService)
         {
             _context = context;
+            _blobService = blobService;
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
@@ -39,6 +42,7 @@ namespace SoccerCASTBackEnd.Controllers
         [HttpPost]
         public async Task<ActionResult<Team>> PostTeam(Team team)
         {
+            team.ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-team-picture.jpg";
             _context.Teams.Add(team);
             await _context.SaveChangesAsync();
             UserTeam userTeam = new UserTeam();
@@ -115,6 +119,48 @@ namespace SoccerCASTBackEnd.Controllers
                 }
             }
             return NoContent();
+        }
+
+        [HttpPost("{id}/upload"), DisableRequestSizeLimit]
+        public async Task<ActionResult> UploadProfilePicture(int id)
+        {
+            var team = _context.Teams.Find(id);
+            IFormFile file = Request.Form.Files[0];
+            if (file == null)
+            {
+                return BadRequest();
+            }
+
+            var fileName = Guid.NewGuid().ToString() + file.FileName;
+
+            var result = await _blobService.UploadFileBlobAsync(
+                    "firstcontainer",
+                    file.OpenReadStream(),
+                    file.ContentType,
+                    fileName);
+
+            var toReturn = result.AbsoluteUri;
+            team.ImagePath = toReturn;
+
+            _context.Entry(team).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TeamExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(new { path = toReturn });
         }
 
         private bool TeamExists(int id)
