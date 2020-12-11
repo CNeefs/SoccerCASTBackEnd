@@ -140,15 +140,15 @@ namespace SoccerCASTBackEnd.Controllers {
                 return BadRequest();
             }
 
+            var fileName = Guid.NewGuid().ToString() + file.FileName;
+
             var result = await _blobService.UploadFileBlobAsync(
                     "firstcontainer",
                     file.OpenReadStream(),
-                    file.ContentType,
-                    file.FileName);
+                    file.ContentType, 
+                    fileName);
 
-            var date = DateTime.Today.ToString();
-
-            var toReturn = date + result.AbsoluteUri;
+            var toReturn = result.AbsoluteUri;
             user.ImagePath = toReturn;
 
             _context.Entry(user).State = EntityState.Modified;
