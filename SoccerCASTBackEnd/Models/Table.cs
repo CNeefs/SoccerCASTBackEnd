@@ -10,7 +10,7 @@ namespace SoccerCASTBackEnd.Models
         public int TableID { get; set; }
         public string TableName { get; set; }
         public string? CompanyName { get; set; }
-        public string Locatie { get; set; }
+        public string Location { get; set; }
         
         //relations
         public int ContactUserID { get; set; }

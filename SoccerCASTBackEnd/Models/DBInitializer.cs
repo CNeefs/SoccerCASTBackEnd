@@ -77,7 +77,7 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.Tables.Add(
-                new Table { TableName = "Tafel 1", Locatie = "Molenstraat 21 2000 Antwerpen", ContactUserID = 1}
+                new Table { TableName = "Tafel 1", CompanyName = "Testbedrijf", Location = "Molenstraat 21 2000 Antwerpen", ContactUserID = 1}
                 );
             context.SaveChanges();
 
@@ -91,7 +91,9 @@ namespace SoccerCASTBackEnd.Models {
                 new MatchStatus { StatusName = "Planned"},
                 new MatchStatus { StatusName = "Playing" },
                 new MatchStatus { StatusName = "Played" },
-                new MatchStatus { StatusName = "Cancelled" }
+                new MatchStatus { StatusName = "Cancelled" },
+                new MatchStatus { StatusName = "Request" },
+                new MatchStatus { StatusName = "Accept" }
                 );
             context.SaveChanges();
 
@@ -106,7 +108,7 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.Matches.Add(
-                new Match { Date = new DateTime(2020,12,27), Score1 = 1, Score2 = 2, TableID = 1, MatchTypeID = 1, Player1ID = 1, Player2ID = 2, MatchStatusID = 1 }
+                new Match { Date = new DateTime(2020,12,27), Score1 = 1, Score2 = 2, TableID = 1, MatchTypeID = 1, Player1ID = 1, Player3ID = 2, MatchStatusID = 1 }
                 );
             context.SaveChanges();
 
