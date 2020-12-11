@@ -50,7 +50,7 @@ namespace SoccerCASTBackEnd.Controllers {
                     return BadRequest(new { message = "This email is already in use." });
                 }
             }
-            if(user.ImagePath.Length == 0)
+            if(user.ImagePath == null)
             {
                 user.ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp";
             }            
