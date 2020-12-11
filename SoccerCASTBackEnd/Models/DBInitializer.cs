@@ -108,7 +108,7 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.Matches.Add(
-                new Match { Date = new DateTime(2020,12,27), Score1 = 1, Score2 = 2, TableID = 1, MatchTypeID = 1, Player1ID = 1, Player3ID = 2, MatchStatusID = 1 }
+                new Match { Date = new DateTime(2020,12,27), Score1 = 1, Score2 = 2, TableID = 1, MatchTypeID = 1, Player1ID = 1, Player3ID = 2, MatchStatusID = 3 }
                 );
             context.SaveChanges();
 
