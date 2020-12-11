@@ -50,6 +50,10 @@ namespace SoccerCASTBackEnd.Controllers {
                     return BadRequest(new { message = "This email is already in use." });
                 }
             }
+            if(user.ImagePath.Length == 0)
+            {
+                user.ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp";
+            }            
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -142,7 +146,9 @@ namespace SoccerCASTBackEnd.Controllers {
                     file.ContentType,
                     file.FileName);
 
-            var toReturn = result.AbsoluteUri;
+            var date = DateTime.Today.ToString();
+
+            var toReturn = date + result.AbsoluteUri;
             user.ImagePath = toReturn;
 
             _context.Entry(user).State = EntityState.Modified;
