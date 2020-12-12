@@ -35,7 +35,9 @@ namespace SoccerCASTBackEnd.Models
         public Competition Competition { get; set; }
         public int? TournamentID { get; set; }
         public Tournament Tournament { get; set; }
-
+        public int? Round { get; set; }
+        public int? Number { get; set; }
+        public int? NextRound { get; set; }
 
     }
 }

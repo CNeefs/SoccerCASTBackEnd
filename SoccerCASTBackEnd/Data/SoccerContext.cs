@@ -25,6 +25,7 @@ namespace SoccerCASTBackEnd.Data {
         public DbSet<UserTeamStatus> UserTeamStatuses { get; set; }
         public DbSet<Competition> Competitions { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<TournamentTeam> TournamentTeams { get; set; }
         public DbSet<MatchStatus> MatchStatuses { get; set; }
 
 
@@ -112,6 +113,9 @@ namespace SoccerCASTBackEnd.Data {
 
             modelBuilder.Entity<Tournament>()
                 .ToTable("Tournaments");
+
+            modelBuilder.Entity<TournamentTeam>()
+                .ToTable("TournamentTeams");
 
             modelBuilder.Entity<MatchStatus>()
                 .ToTable("MatchStatuses");
