@@ -45,6 +45,8 @@ namespace SoccerCASTBackEnd.Controllers
                 .Include(m => m.MatchType)
                 .Include(m => m.Player1)
                 .Include(m => m.Player2)
+                .Include(m => m.Player3)
+                .Include(m => m.Player4)
                 .Include(m => m.Team1)
                 .Include(m => m.Team2)
                 .Include(m => m.MatchStatus)
