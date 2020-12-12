@@ -61,7 +61,9 @@ namespace SoccerCASTBackEnd.Models {
                 new Permission { Name = "RANKING_VIEW", RoleID = 2 },
                 new Permission { Name = "RANKING_VIEW", RoleID = 1 },
                 new Permission { Name = "PROFILE_EDIT", RoleID = 2 },
-                new Permission { Name = "PROFILE_EDIT", RoleID = 1 }
+                new Permission { Name = "PROFILE_EDIT", RoleID = 1 },
+                new Permission { Name = "PLAY_VIEW", RoleID = 2 },
+                new Permission { Name = "PLAY_VIEW", RoleID = 1 }
             );
             context.SaveChanges();
 
