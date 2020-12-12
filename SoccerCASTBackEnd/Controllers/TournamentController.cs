@@ -46,6 +46,63 @@ namespace SoccerCASTBackEnd.Controllers
             return Ok(tournament);
         }
 
+        [HttpPost("Start")]
+        public async Task<ActionResult<Tournament>> StartTournament(Tournament tournament)
+        {
+            var teams = _context.TournamentTeams.Where(tt => tt.TournamentID == tournament.TournamentID).ToList();
+            
+            int count = tournament.Match_Count;
+            int rounds = 1;
+            for (int i = tournament.Match_Count/2; i > 1; i /= 2) rounds++;
+
+            for (int i = 1; i <= rounds; i++)
+            {
+                int k = 1;
+                for (int j = 1; j <= count / 2; j++)
+                {
+                    if (i == 1) {
+                        var match = new Match();
+                        match.Score1 = 0;
+                        match.Score2 = 0;
+                        match.Date = DateTime.Now;
+                        match.TableID = 1;
+                        match.MatchTypeID = 1;
+                        match.Team1ID = teams[j - 1].TeamID;
+                        match.Team2ID = teams[teams.Count - j].TeamID;
+                        match.Player1ID = teams[j - 1].Player1ID;
+                        match.Player2ID = teams[j - 1].Player2ID;
+                        match.Player3ID = teams[teams.Count - j].Player1ID;
+                        match.Player4ID = teams[teams.Count - j].Player2ID;
+                        match.MatchStatusID = 6;
+                        match.TournamentID = tournament.TournamentID;
+                        match.Round = i;
+                        match.Number = j;
+                        match.NextRound = k;
+                        _context.Matches.Add(match);
+                    } else {
+                        var match = new Match();
+                        match.Score1 = 0;
+                        match.Score2 = 0;
+                        match.Date = DateTime.Now;
+                        match.TableID = 1;
+                        match.MatchTypeID = 1;
+                        match.MatchStatusID = 6;
+                        match.TournamentID = tournament.TournamentID;
+                        match.Round = i;
+                        match.Number = j;
+                        match.NextRound = k;
+                        _context.Matches.Add(match);
+                    }
+                    if (j % 2 == 0) k++;
+                }
+                count /= 2;
+            }
+            tournament.isStart = true;
+            _context.Entry(tournament).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return Ok(tournament);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<Tournament>> DeleteTournament(int id)
         {
@@ -59,6 +116,8 @@ namespace SoccerCASTBackEnd.Controllers
             await _context.SaveChangesAsync();
             return tournament;
         }
+
+
         [HttpPut("{id}")]
         public async Task<ActionResult<Tournament>> PutTournament(int id, Tournament tournament)
         {

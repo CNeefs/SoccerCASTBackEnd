@@ -106,6 +106,29 @@ namespace SoccerCASTBackEnd.Controllers
             return matches;
         }
 
+        [HttpGet("Tournament/{id}")]
+        public async Task<ActionResult<IEnumerable<Match>>> GetTournamentMatches(int id)
+        {
+            var matches = await _context.Matches.Where(m => m.TournamentID == id)
+                .Include(m => m.Table)
+                .Include(m => m.MatchType)
+                .Include(m => m.Team1)
+                .Include(m => m.Team2)
+                .Include(m => m.Player1)
+                .Include(m => m.Player2)
+                .Include(m => m.Player3)
+                .Include(m => m.Player4)
+                .Include(m => m.MatchStatus)
+                .Include(m => m.Competition)
+                .Include(m => m.Tournament)
+                .ToListAsync();
+            if (matches == null)
+            {
+                return NotFound();
+            }
+            return matches;
+        }
+
         [HttpGet("Team/Competitions/{id}")]
         public async Task<ActionResult<IEnumerable<Match>>> GetTeamCompetitions(int id)
         {
