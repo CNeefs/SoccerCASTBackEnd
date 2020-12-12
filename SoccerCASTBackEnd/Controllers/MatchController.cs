@@ -177,6 +177,37 @@ namespace SoccerCASTBackEnd.Controllers
             {
                 return BadRequest();
             }
+            if (match.MatchStatusID == 4)
+            {
+                if (match.Player1ID != null)
+                {
+                    var user = _context.Users.Where(u => u.UserID == match.Player1ID).SingleOrDefault();
+                    if (match.Score1 > match.Score2) user.TimesWon++;
+                    else user.TimesLost++;
+                    _context.Entry(user).State = EntityState.Modified;
+                }
+                if (match.Player2ID != null)
+                {
+                    var user = _context.Users.Where(u => u.UserID == match.Player2ID).SingleOrDefault();
+                    if (match.Score1 > match.Score2) user.TimesWon++;
+                    else user.TimesLost++;
+                    _context.Entry(user).State = EntityState.Modified;
+                }
+                if (match.Player3ID != null)
+                {
+                    var user = _context.Users.Where(u => u.UserID == match.Player3ID).SingleOrDefault();
+                    if (match.Score1 < match.Score2) user.TimesWon++;
+                    else user.TimesLost++;
+                    _context.Entry(user).State = EntityState.Modified;
+                }
+                if (match.Player4ID != null)
+                {
+                    var user = _context.Users.Where(u => u.UserID == match.Player4ID).SingleOrDefault();
+                    if (match.Score1 < match.Score2) user.TimesWon++;
+                    else user.TimesLost++;
+                    _context.Entry(user).State = EntityState.Modified;
+                }
+            }
 
             _context.Entry(match).State = EntityState.Modified;
 
