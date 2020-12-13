@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace SoccerCASTBackEnd.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tournament>>> GetTournaments()
         {
@@ -27,6 +29,8 @@ namespace SoccerCASTBackEnd.Controllers
 
 
         }
+
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Tournament>> GetTournament(int id)
         {
@@ -38,6 +42,7 @@ namespace SoccerCASTBackEnd.Controllers
             return tournament;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Tournament>> PostTournament(Tournament tournament)
         {
@@ -46,6 +51,7 @@ namespace SoccerCASTBackEnd.Controllers
             return Ok(tournament);
         }
 
+        [Authorize]
         [HttpPost("Start")]
         public async Task<ActionResult<Tournament>> StartTournament(Tournament tournament)
         {
@@ -117,7 +123,7 @@ namespace SoccerCASTBackEnd.Controllers
             return tournament;
         }
 
-
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<Tournament>> PutTournament(int id, Tournament tournament)
         {

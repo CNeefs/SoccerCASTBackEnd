@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,8 @@ namespace SoccerCASTBackEnd.Controllers
             _context = context;
             _blobService = blobService;
         }
+
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
         {
@@ -32,6 +35,8 @@ namespace SoccerCASTBackEnd.Controllers
             }
             return teams;
         }
+
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id)
         {
@@ -43,6 +48,7 @@ namespace SoccerCASTBackEnd.Controllers
             return team;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Team>> PostTeam(Team team)
         {
@@ -58,6 +64,7 @@ namespace SoccerCASTBackEnd.Controllers
             return Ok(team);
         }
 
+        [Authorize]
         [HttpPost("join/{id}")]
         public async Task<ActionResult<Team>> JoinTeam(int id, Team team)
         {
@@ -70,6 +77,7 @@ namespace SoccerCASTBackEnd.Controllers
             return Ok(team);
         }
 
+        [Authorize]
         [HttpPost("join/review/{id}")]
         public async Task<ActionResult<Team>> JoinReviewTeam(int id, Team team)
         {
@@ -82,6 +90,7 @@ namespace SoccerCASTBackEnd.Controllers
             return Ok(team);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Team>> DeleteTeam(int id)
         {
@@ -97,6 +106,8 @@ namespace SoccerCASTBackEnd.Controllers
             await _context.SaveChangesAsync();
             return team;
         }
+
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<Team>> PutTeam(int id, Team team)
         {
@@ -140,6 +151,7 @@ namespace SoccerCASTBackEnd.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpPost("{id}/upload"), DisableRequestSizeLimit]
         public async Task<ActionResult> UploadProfilePicture(int id)
         {

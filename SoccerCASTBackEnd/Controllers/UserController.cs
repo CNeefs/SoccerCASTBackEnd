@@ -96,6 +96,7 @@ namespace SoccerCASTBackEnd.Controllers {
             return Ok(user);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<User>> PutUser(int id, User user)
         {
@@ -133,6 +134,7 @@ namespace SoccerCASTBackEnd.Controllers {
             return NoContent();
         }
 
+        [Authorize]
         [HttpPost("{id}/upload"), DisableRequestSizeLimit]
         public async Task<ActionResult> UploadProfilePicture(int id)
         {
@@ -180,6 +182,7 @@ namespace SoccerCASTBackEnd.Controllers {
             return _context.Users.Any(u => u.UserID == id);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {

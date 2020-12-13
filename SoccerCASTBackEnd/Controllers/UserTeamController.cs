@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,7 @@ namespace SoccerCASTBackEnd.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserTeam>>> GetUserTeams()
         {
@@ -28,12 +29,14 @@ namespace SoccerCASTBackEnd.Controllers
 
         }
 
+        [Authorize]
         [HttpGet("{userid}/{teamid}")]
         public async Task<ActionResult<UserTeam>> UserTeams(int userid, int teamid)
         {
             return _context.UserTeam.Where(ut => ut.UserID == userid && ut.TeamID == teamid).SingleOrDefault();
         }
 
+        [Authorize]
         [HttpGet("UserTeams/{id}")]
         public async Task<ActionResult<IEnumerable<Team>>> GetUserTeams(int id)
         {
@@ -42,6 +45,7 @@ namespace SoccerCASTBackEnd.Controllers
                 .ToListAsync();
         }
 
+        [Authorize]
         [HttpGet("TeamUsers/{id}/{status}")]
         public async Task<ActionResult<IEnumerable<User>>> GetTeamUsers(int id, int status)
         {
@@ -50,6 +54,7 @@ namespace SoccerCASTBackEnd.Controllers
                 .ToListAsync();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<UserTeam>> PostUserTeam(UserTeam userteam)
         {
@@ -58,7 +63,7 @@ namespace SoccerCASTBackEnd.Controllers
             return Ok(userteam);
         }
 
-
+        [Authorize]
         [HttpPost("Approve")]
         public async Task<ActionResult<UserTeam>> ApproveUser(UserTeam userteam)
         {
@@ -69,7 +74,7 @@ namespace SoccerCASTBackEnd.Controllers
             return NoContent();
         }
 
-
+        [Authorize]
         [HttpPost("Decline")]
         public async Task<ActionResult<UserTeam>> DeclineUser(UserTeam userteam)
         {
@@ -79,6 +84,7 @@ namespace SoccerCASTBackEnd.Controllers
             return NoContent();
         }
 
+        [Authorize]
         [HttpDelete("Decline/User/{userID}/Team/{teamID}")]
         public async Task<ActionResult<UserTeam>> DeleteUserTeam(int userID, int teamID)
         {
@@ -93,6 +99,7 @@ namespace SoccerCASTBackEnd.Controllers
             return declinedUserTeam;
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<UserTeam>> DeleteUserTeam(int id)
         {
@@ -107,6 +114,7 @@ namespace SoccerCASTBackEnd.Controllers
             return userteam;
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<UserTeam>> PutUserTeam(int id, UserTeam userteam)
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace SoccerCASTBackEnd.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Competition>>> GetCompetitions()
         {
@@ -27,6 +29,8 @@ namespace SoccerCASTBackEnd.Controllers
 
 
         }
+
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Competition>> GetCompetition(int id)
         {
@@ -38,6 +42,7 @@ namespace SoccerCASTBackEnd.Controllers
             return competition;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Competition>> PostCompetition(Competition competition)
         {
@@ -46,6 +51,7 @@ namespace SoccerCASTBackEnd.Controllers
             return Ok(competition);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Competition>> DeleteCompetition(int id)
         {
@@ -59,6 +65,8 @@ namespace SoccerCASTBackEnd.Controllers
             await _context.SaveChangesAsync();
             return competition;
         }
+
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<Competition>> PutCompetition(int id, Competition competition)
         {
@@ -92,6 +100,7 @@ namespace SoccerCASTBackEnd.Controllers
             return _context.Competitions.Any(c => c.CompetitionID == id);
         }
 
+        [Authorize]
         [HttpPut("active/{id}")]
         public async Task<ActionResult<Competition>> SetActive(int id, Competition competition)
         {

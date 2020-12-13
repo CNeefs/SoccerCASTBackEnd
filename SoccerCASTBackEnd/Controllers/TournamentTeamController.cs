@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SoccerCASTBackEnd.Data;
 using SoccerCASTBackEnd.Models;
@@ -19,12 +20,14 @@ namespace SoccerCASTBackEnd.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<TournamentTeam>>> GetTournamentTeams(int id)
         {
             return await _context.TournamentTeams.Where(tt => tt.TournamentID == id).Include(tt => tt.Team).Include(tt => tt.Player1).Include(tt => tt.Player2).ToListAsync();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<IEnumerable<TournamentTeam>>> AddTournamentTeam(TournamentTeam tournamentTeam)
         {
