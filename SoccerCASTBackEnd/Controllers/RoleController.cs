@@ -21,7 +21,6 @@ namespace SoccerCASTBackEnd.Controllers
             _context = context;
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
