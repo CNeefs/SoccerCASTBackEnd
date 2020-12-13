@@ -104,6 +104,16 @@ namespace SoccerCASTBackEnd.Controllers {
             {
                 return BadRequest();
             }
+
+            var users = await _context.Users.ToListAsync();
+            foreach (User checkUser in users)
+            {
+                if (checkUser.Email.Equals(user.Email))
+                {
+                    return BadRequest(new { message = "This email is already in use." });
+                }
+            }
+
             _context.UserRoles.RemoveRange(_context.UserRoles.Where(ur => ur.UserID == user.UserID).ToList());
             foreach (var role in user.Roles)
             {
