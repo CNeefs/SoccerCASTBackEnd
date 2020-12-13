@@ -15,6 +15,8 @@ namespace SoccerCASTBackEnd.Models
         public string? Winner { get; set; }
 
         //relations
+        public int TableID { get; set; }
+        public Table Table { get; set; }
         public int TournamentStatusID { get; set; }
         public TournamentStatus TournamentStatus { get; set; }
     }
