@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace SoccerCASTBackEnd.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Match>>> GetMatches()
         {
@@ -37,6 +39,7 @@ namespace SoccerCASTBackEnd.Controllers
                 .ToListAsync();
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Match>> GetMatch(int id)
         {
@@ -60,6 +63,7 @@ namespace SoccerCASTBackEnd.Controllers
             return match;
         }
 
+        [Authorize]
         [HttpGet("User/{id}")]
         public async Task<ActionResult<IEnumerable<Match>>> GetUserMatches(int id)
         {
@@ -83,6 +87,7 @@ namespace SoccerCASTBackEnd.Controllers
             return matches;
         }
 
+        [Authorize]
         [HttpGet("Team/{id}")]
         public async Task<ActionResult<IEnumerable<Match>>> GetTeamMatches(int id)
         {
@@ -106,6 +111,7 @@ namespace SoccerCASTBackEnd.Controllers
             return matches;
         }
 
+        [Authorize]
         [HttpGet("Tournament/{id}")]
         public async Task<ActionResult<IEnumerable<Match>>> GetTournamentMatches(int id)
         {
@@ -129,6 +135,7 @@ namespace SoccerCASTBackEnd.Controllers
             return matches;
         }
 
+        [Authorize]
         [HttpGet("Team/Competitions/{id}")]
         public async Task<ActionResult<IEnumerable<Match>>> GetTeamCompetitions(int id)
         {
@@ -148,6 +155,7 @@ namespace SoccerCASTBackEnd.Controllers
             return matches;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Match>> PostMatch(Match match)
         {
@@ -156,6 +164,7 @@ namespace SoccerCASTBackEnd.Controllers
             return Ok(match);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Match>> DeleteMatch(int id)
         {
@@ -170,6 +179,7 @@ namespace SoccerCASTBackEnd.Controllers
             return match;
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult<Match>> PutMatch(int id, Match match)
         {
