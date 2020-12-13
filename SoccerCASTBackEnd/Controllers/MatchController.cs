@@ -187,6 +187,10 @@ namespace SoccerCASTBackEnd.Controllers
             {
                 return BadRequest();
             }
+
+            _context.Entry(match).State = EntityState.Modified;
+            _context.SaveChanges();
+
             if (match.MatchStatusID == 4)
             {
                 if (match.Player1ID != null)
@@ -217,9 +221,56 @@ namespace SoccerCASTBackEnd.Controllers
                     else user.TimesLost++;
                     _context.Entry(user).State = EntityState.Modified;
                 }
+                //Check for next match
+                if (match.TournamentID != null)
+                {
+                    if (_context.Matches.Where(m => m.TournamentID == match.TournamentID && m.Round == (match.Round + 1)).Count() != 0) {
+                        var nextMatch = _context.Matches.Where(m => m.TournamentID == match.TournamentID && m.Round == (match.Round + 1) &&
+                            m.Number == match.NextRound).SingleOrDefault();
+                        var previousMatches = _context.Matches.Where(m => m.TournamentID == match.TournamentID && m.Round == match.Round && m.NextRound == match.NextRound).ToList();
+                        var arrayNumber1 = 1;
+                        var arrayNumber2 = 0;
+                        if (previousMatches[0].MatchID == match.MatchID) {
+                            arrayNumber1 = 0;
+                            arrayNumber2 = 1;
+                        }
+                        if (previousMatches[arrayNumber1].Number < previousMatches[arrayNumber2].Number) {
+                            if (match.Score1 > match.Score2) {
+                                nextMatch.Team1ID = match.Team1ID;
+                                nextMatch.Player1ID = match.Player1ID;
+                                nextMatch.Player2ID = match.Player2ID;
+                            } else {
+                                nextMatch.Team1ID = match.Team2ID;
+                                nextMatch.Player1ID = match.Player3ID;
+                                nextMatch.Player2ID = match.Player4ID;
+                            }
+                        } else {
+                            if (match.Score1 > match.Score2) {
+                                nextMatch.Team2ID = match.Team1ID;
+                                nextMatch.Player3ID = match.Player1ID;
+                                nextMatch.Player4ID = match.Player2ID;
+                            } else {
+                                nextMatch.Team2ID = match.Team2ID;
+                                nextMatch.Player3ID = match.Player3ID;
+                                nextMatch.Player4ID = match.Player4ID;
+                            }
+                        }
+                        _context.Entry(nextMatch).State = EntityState.Modified;
+                    } else {
+                        var tournament = _context.Tournaments.Where(t => t.TournamentID == match.TournamentID).SingleOrDefault();
+                        tournament.isStart = false;
+                        if (match.Score1 > match.Score2) {
+                            var name = _context.Teams.Where(t => t.TeamID == match.Team1ID).SingleOrDefault().TeamName;
+                            tournament.Winner = name;
+                        } else {
+                            var name = _context.Teams.Where(t => t.TeamID == match.Team2ID).SingleOrDefault().TeamName;
+                            tournament.Winner = name;
+                        }
+                        _context.Entry(tournament).State = EntityState.Modified;
+                        _context.SaveChanges();
+                    }
+                }
             }
-
-            _context.Entry(match).State = EntityState.Modified;
 
             try
             {
