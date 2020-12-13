@@ -15,5 +15,7 @@ namespace SoccerCASTBackEnd.Models
         //relations
         public int ContactUserID { get; set; }
         public User ContactUser { get; set; }
+        public int TableStatusID { get; set; }
+        public TableStatus TableStatus { get; set; }
     }
 }

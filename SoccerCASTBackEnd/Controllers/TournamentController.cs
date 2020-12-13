@@ -117,8 +117,8 @@ namespace SoccerCASTBackEnd.Controllers
             {
                 return NotFound();
             }
-
-            _context.Tournaments.Remove(tournament);
+            tournament.TournamentStatusID = 2;
+            _context.Entry(tournament).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return tournament;
         }

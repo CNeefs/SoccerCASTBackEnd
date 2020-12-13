@@ -13,6 +13,7 @@ namespace SoccerCASTBackEnd.Data {
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<UserStatus> UserStatuses { get; set; }
         public DbSet<UserRole> UserRoles { get; set; } 
         public DbSet<Role> Roles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
@@ -21,15 +22,21 @@ namespace SoccerCASTBackEnd.Data {
         public DbSet<Match> Matches { get; set; }
         public DbSet<MatchType> MatchTypes { get; set; }
         public DbSet<Table> Tables { get; set; }
+        public DbSet<TableStatus> TableStatuses { get; set; }
         public DbSet<UserTeam> UserTeam { get; set; }
         public DbSet<UserTeamStatus> UserTeamStatuses { get; set; }
         public DbSet<Competition> Competitions { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<TournamentStatus> TournamentStatuses { get; set; }
         public DbSet<TournamentTeam> TournamentTeams { get; set; }
         public DbSet<MatchStatus> MatchStatuses { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+            modelBuilder.Entity<UserStatus>()
+                .ToTable("UserStatuses");
+
             modelBuilder.Entity<User>()
                 .ToTable("Users");
 
@@ -89,6 +96,9 @@ namespace SoccerCASTBackEnd.Data {
             modelBuilder.Entity<MatchType>()
                 .ToTable("MatchTypes");
 
+            modelBuilder.Entity<TableStatus>()
+                .ToTable("TableStatuses");
+
             modelBuilder.Entity<Table>()
                 .ToTable("Tables");
 
@@ -110,6 +120,9 @@ namespace SoccerCASTBackEnd.Data {
 
             modelBuilder.Entity<Competition>()
                 .ToTable("Competitions");
+
+            modelBuilder.Entity<TournamentStatus>()
+                .ToTable("TournamentStatuses");
 
             modelBuilder.Entity<Tournament>()
                 .ToTable("Tournaments");
