@@ -85,6 +85,10 @@ namespace SoccerCASTBackEnd.Controllers {
             {
                 return BadRequest(new { message = "Email or password is incorrect" });
             }
+            if (user.UserStatusID == 2)
+            {
+                return BadRequest(new { message = "Disbanded account" });
+            }
 
             user.Roles = await _context.UserRoles.Where(ur=>ur.UserID == user.UserID).Include(ur => ur.Role).Select(ur => ur.Role).ToListAsync();
 
@@ -104,15 +108,19 @@ namespace SoccerCASTBackEnd.Controllers {
             {
                 return BadRequest();
             }
-
-            var users = await _context.Users.ToListAsync();
-            foreach (User checkUser in users)
+            var thisUser = _context.Users.Find(id);
+            if (!user.Email.Equals(thisUser.Email))
             {
-                if (checkUser.Email.Equals(user.Email))
+                var users = await _context.Users.ToListAsync();
+                foreach (User checkUser in users)
                 {
-                    return BadRequest(new { message = "This email is already in use." });
+                    if (checkUser.Email.Equals(user.Email))
+                    {
+                        return BadRequest(new { message = "This email is already in use." });
+                    }
                 }
             }
+            _context.Entry(thisUser).State = EntityState.Detached;
 
             _context.UserRoles.RemoveRange(_context.UserRoles.Where(ur => ur.UserID == user.UserID).ToList());
             foreach (var role in user.Roles)
@@ -123,7 +131,7 @@ namespace SoccerCASTBackEnd.Controllers {
                 userRole.RoleID = role.RoleID;
                 _context.UserRoles.Add(userRole);
             }
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             _context.Entry(user).State = EntityState.Modified;
 
             try
@@ -201,10 +209,27 @@ namespace SoccerCASTBackEnd.Controllers {
             {
                 return NotFound();
             }
-            _context.UserRoles.RemoveRange(_context.UserRoles.Where(ur => ur.UserID == user.UserID).ToList());
-            _context.Users.Remove(user);
+            user.UserStatusID = 2;
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
+            var userteams = _context.UserTeam.Where(ut => ut.UserID == id).ToList();
+            foreach (var userteam in userteams)
+            {
+                _context.UserTeam.Remove(userteam);
+            }
+            _context.SaveChanges();
+            var captainTeams = _context.Teams.Where(t => t.CaptainID == id).ToList();
+            foreach (var captainteam in captainTeams)
+            {
+                captainteam.TeamStatusID = 4;
+                _context.Entry(captainteam).State = EntityState.Modified;
+                var userteamscaptain = _context.UserTeam.Where(ut => ut.TeamID == captainteam.TeamID).ToList();
+                foreach (var userteamcaptain in userteamscaptain)
+                {
+                    _context.UserTeam.Remove(userteamcaptain);
+                }
+                _context.SaveChanges();
+            }
             return user;
         }
         [Authorize]

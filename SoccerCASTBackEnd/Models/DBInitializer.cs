@@ -67,22 +67,28 @@ namespace SoccerCASTBackEnd.Models {
             );
             context.SaveChanges();
 
-            User user1 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Peter", LastName = "Celie", Email = "player1@thomasmore.be", BirthDate = new DateTime(1969, 5, 4), TimesLost = 2, TimesWon = 4, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/9f686271-7aa3-415f-81c7-b7a44128b068Peterselie.jpg" };
-            User user2 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Tom", LastName = "Ato", Email = "player2@thomasmore.be", BirthDate = new DateTime(1969, 11, 21), TimesLost = 3, TimesWon = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/64a2f0fc-8b17-4651-ac96-0424403e739btomaat-groente-Veggipedia.png" };
-            User user3 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Apple", LastName = "Sien", Email = "player3@thomasmore.be", BirthDate = new DateTime(1969, 3, 8), TimesLost = 2, TimesWon = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/f14cdf2e-7e32-4836-9133-94ad9185a90976e3afed87dc07327310a312c2c65ffe.jpg" };
-            User user4 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Ban", LastName = "Aan", Email = "player4@thomasmore.be", BirthDate = new DateTime(1969, 9, 28), TimesLost = 1, TimesWon = 3, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/c6c68100-7f89-423d-902b-e00d6877252bbanaan-vierkant.jpg" };
-            User user5 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Ki", LastName = "Wi", Email = "player5@thomasmore.be", BirthDate = new DateTime(1969, 2, 4), TimesLost = 1, TimesWon = 0, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/1ebb586f-0afb-490e-ad1e-baa8cfba52e5Kiwi-fruits-582a07b.jpg" };
-            User user6 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Black", LastName = "Berry", Email = "player6@thomasmore.be", BirthDate = new DateTime(1969, 3, 4), TimesLost = 1, TimesWon = 0, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user7 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Cher", LastName = "Ry", Email = "player7@thomasmore.be", BirthDate = new DateTime(1969, 4, 4), TimesLost = 1, TimesWon = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user8 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Coco", LastName = "Nut", Email = "player8@thomasmore.be", BirthDate = new DateTime(1969, 5, 4), TimesLost = 1, TimesWon = 2, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user9 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Papa", LastName = "Ya", Email = "player9@thomasmore.be", BirthDate = new DateTime(1969, 6, 4), TimesLost = 1, TimesWon = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user10 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Pine", LastName = "Apple", Email = "player10@thomasmore.be", BirthDate = new DateTime(1969, 7, 4), TimesLost = 2, TimesWon = 0, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user11 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Pump", LastName = "Kin", Email = "player11@thomasmore.be", BirthDate = new DateTime(1969, 8, 4), TimesLost = 1, TimesWon = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user12 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Oli", LastName = "Ve", Email = "player12@thomasmore.be", BirthDate = new DateTime(1969, 9, 4), TimesLost = 0, TimesWon = 3, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user13 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Nect", LastName = "Arine", Email = "player13@thomasmore.be", BirthDate = new DateTime(1969, 10, 4), TimesLost = 1, TimesWon = 0, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user14 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Gra", LastName = "Pe", Email = "player14@thomasmore.be", BirthDate = new DateTime(1969, 11, 4), TimesLost = 1, TimesWon = 0, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user15 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Mel", LastName = "On", Email = "player15@thomasmore.be", BirthDate = new DateTime(1969, 12, 4), TimesLost = 1, TimesWon = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
-            User user16 = new User { Password = BCrypt.Net.BCrypt.HashPassword("test"), FirstName = "Cac", LastName = "Ao", Email = "player16@thomasmore.be", BirthDate = new DateTime(1969, 5, 24), TimesLost = 1, TimesWon = 2, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            context.UserStatuses.AddRange(
+                new UserStatus { StatusName = "Disband" },
+                new UserStatus { StatusName = "Exists" }
+            );
+            context.SaveChanges();
+
+            User user1 = new User { Password = BCrypt.Net.BCrypt.HashPassword("adminfruitkom"), FirstName = "Peter", LastName = "Celie", Email = "player1@thomasmore.be", BirthDate = new DateTime(1969, 5, 4), TimesLost = 2, TimesWon = 4, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/9f686271-7aa3-415f-81c7-b7a44128b068Peterselie.jpg" };
+            User user2 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Tom", LastName = "Ato", Email = "player2@thomasmore.be", BirthDate = new DateTime(1969, 11, 21), TimesLost = 3, TimesWon = 1, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/64a2f0fc-8b17-4651-ac96-0424403e739btomaat-groente-Veggipedia.png" };
+            User user3 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Apple", LastName = "Sien", Email = "player3@thomasmore.be", BirthDate = new DateTime(1969, 3, 8), TimesLost = 2, TimesWon = 1, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/f14cdf2e-7e32-4836-9133-94ad9185a90976e3afed87dc07327310a312c2c65ffe.jpg" };
+            User user4 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Ban", LastName = "Aan", Email = "player4@thomasmore.be", BirthDate = new DateTime(1969, 9, 28), TimesLost = 1, TimesWon = 3, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/c6c68100-7f89-423d-902b-e00d6877252bbanaan-vierkant.jpg" };
+            User user5 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Ki", LastName = "Wi", Email = "player5@thomasmore.be", BirthDate = new DateTime(1969, 2, 4), TimesLost = 1, TimesWon = 0, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/1ebb586f-0afb-490e-ad1e-baa8cfba52e5Kiwi-fruits-582a07b.jpg" };
+            User user6 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Black", LastName = "Berry", Email = "player6@thomasmore.be", BirthDate = new DateTime(1969, 3, 4), TimesLost = 1, TimesWon = 0, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user7 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Cher", LastName = "Ry", Email = "player7@thomasmore.be", BirthDate = new DateTime(1969, 4, 4), TimesLost = 1, TimesWon = 1, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user8 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Coco", LastName = "Nut", Email = "player8@thomasmore.be", BirthDate = new DateTime(1969, 5, 4), TimesLost = 1, TimesWon = 2, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user9 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Papa", LastName = "Ya", Email = "player9@thomasmore.be", BirthDate = new DateTime(1969, 6, 4), TimesLost = 1, TimesWon = 1, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user10 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Pine", LastName = "Apple", Email = "player10@thomasmore.be", BirthDate = new DateTime(1969, 7, 4), TimesLost = 2, TimesWon = 0, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user11 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Pump", LastName = "Kin", Email = "player11@thomasmore.be", BirthDate = new DateTime(1969, 8, 4), TimesLost = 1, TimesWon = 1, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user12 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Oli", LastName = "Ve", Email = "player12@thomasmore.be", BirthDate = new DateTime(1969, 9, 4), TimesLost = 0, TimesWon = 3, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user13 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Nect", LastName = "Arine", Email = "player13@thomasmore.be", BirthDate = new DateTime(1969, 10, 4), TimesLost = 1, TimesWon = 0, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user14 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Gra", LastName = "Pe", Email = "player14@thomasmore.be", BirthDate = new DateTime(1969, 11, 4), TimesLost = 1, TimesWon = 0, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user15 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Mel", LastName = "On", Email = "player15@thomasmore.be", BirthDate = new DateTime(1969, 12, 4), TimesLost = 1, TimesWon = 1, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
+            User user16 = new User { Password = BCrypt.Net.BCrypt.HashPassword("fruitkom"), FirstName = "Cac", LastName = "Ao", Email = "player16@thomasmore.be", BirthDate = new DateTime(1969, 5, 24), TimesLost = 1, TimesWon = 2, UserStatusID = 1, ImagePath = "https://soccercastpictures.blob.core.windows.net/firstcontainer/blank-profile-picture.webp" };
 
 
             context.Users.AddRange(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14, user15, user16);
@@ -109,10 +115,16 @@ namespace SoccerCASTBackEnd.Models {
             );
             context.SaveChanges();
 
+            context.TableStatuses.AddRange(
+                new TableStatus { StatusName = "Disband" },
+                new TableStatus { StatusName = "Exists" }
+            );
+            context.SaveChanges();
+
             context.Tables.AddRange(
-                new Table { TableName = "Tafel 1", CompanyName = "Peterselie Bedrijf", Location = "Molenstraat 21, 2000 Antwerpen (Lokaal 3)", ContactUserID = user1.UserID },
-                new Table { TableName = "Tafel 2", CompanyName = "Peterselie Bedrijf", Location = "Molenstraat 21, 2000 Antwerpen (Lokaal 5)", ContactUserID = user1.UserID },
-                new Table { TableName = "Tafel 3", CompanyName = "Tomaten Bedrijf", Location = "Arnold Van Loonlaan 48, 3500 Hasselt (Lokaal 1)", ContactUserID = user2.UserID }
+                new Table { TableName = "Tafel 1", CompanyName = "Peterselie Bedrijf", Location = "Molenstraat 21, 2000 Antwerpen (Lokaal 3)", ContactUserID = user1.UserID, TableStatusID = 1 },
+                new Table { TableName = "Tafel 2", CompanyName = "Peterselie Bedrijf", Location = "Molenstraat 21, 2000 Antwerpen (Lokaal 5)", ContactUserID = user1.UserID, TableStatusID = 1 },
+                new Table { TableName = "Tafel 3", CompanyName = "Tomaten Bedrijf", Location = "Arnold Van Loonlaan 48, 3500 Hasselt (Lokaal 1)", ContactUserID = user2.UserID, TableStatusID = 1 }
             );
             context.SaveChanges();
 
@@ -132,8 +144,14 @@ namespace SoccerCASTBackEnd.Models {
             );
             context.SaveChanges();
 
-            Tournament tournament1 = new Tournament { Edition = "Doomsday 2020", Total_Joined = 8, Match_Count = 8, isStart = false, Winner = "De bananentros" };
-            Tournament tournament2 = new Tournament { Edition = "Fruit Bowl 2020", Total_Joined = 4, Match_Count = 8, isStart = false };
+            context.TournamentStatuses.AddRange(
+                new TournamentStatus { StatusName = "Disband" },
+                new TournamentStatus { StatusName = "Exists" }
+            );
+            context.SaveChanges();
+
+            Tournament tournament1 = new Tournament { Edition = "Doomsday 2020", Total_Joined = 8, Match_Count = 8, isStart = false, Winner = "De bananentros", TournamentStatusID = 1 };
+            Tournament tournament2 = new Tournament { Edition = "Fruit Bowl 2020", Total_Joined = 4, Match_Count = 8, isStart = false, TournamentStatusID = 1 };
 
             context.Tournaments.AddRange(tournament1, tournament2);
             context.SaveChanges();
@@ -144,6 +162,7 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             context.TeamStatuses.AddRange(
+                new TeamStatus { StatusName = "Disband" },
                 new TeamStatus { StatusName = "Closed" },
                 new TeamStatus { StatusName = "Review" },
                 new TeamStatus { StatusName = "Open" }

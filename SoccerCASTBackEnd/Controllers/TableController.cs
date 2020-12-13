@@ -97,7 +97,8 @@ namespace SoccerCASTBackEnd.Controllers
                 return NotFound();
             }
 
-            _context.Tables.Remove(table);
+            table.TableStatusID = 2;
+            _context.Entry(table).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return table;

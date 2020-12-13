@@ -29,5 +29,9 @@ namespace SoccerCASTBackEnd.Models {
         public List<string> Permissions { get; set; }
 
         public string ImagePath { get; set; }
+
+        //Relations
+        public int UserStatusID { get; set; }
+        public UserStatus UserStatus { get; set; }
     }
 }
