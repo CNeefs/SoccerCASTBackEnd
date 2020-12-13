@@ -150,8 +150,8 @@ namespace SoccerCASTBackEnd.Models {
             );
             context.SaveChanges();
 
-            Tournament tournament1 = new Tournament { Edition = "Doomsday 2020", Total_Joined = 8, Match_Count = 8, isStart = false, Winner = "De bananentros", TournamentStatusID = 1 };
-            Tournament tournament2 = new Tournament { Edition = "Fruit Bowl 2020", Total_Joined = 4, Match_Count = 8, isStart = false, TournamentStatusID = 1 };
+            Tournament tournament1 = new Tournament { Edition = "Doomsday 2020", Total_Joined = 8, Match_Count = 8, isStart = false, Winner = "De bananentros", TableID = 1, TournamentStatusID = 1 };
+            Tournament tournament2 = new Tournament { Edition = "Fruit Bowl 2020", Total_Joined = 4, Match_Count = 8, isStart = false, TableID = 1,TournamentStatusID = 1 };
 
             context.Tournaments.AddRange(tournament1, tournament2);
             context.SaveChanges();
