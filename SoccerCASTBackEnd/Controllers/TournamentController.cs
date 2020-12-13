@@ -25,7 +25,7 @@ namespace SoccerCASTBackEnd.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tournament>>> GetTournaments()
         {
-            return await _context.Tournaments.ToListAsync();
+            return await _context.Tournaments.Include(t => t.Table).ToListAsync();
 
 
         }
@@ -34,7 +34,7 @@ namespace SoccerCASTBackEnd.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Tournament>> GetTournament(int id)
         {
-            var tournament = await _context.Tournaments.SingleOrDefaultAsync(t => t.TournamentID == id);
+            var tournament = await _context.Tournaments.Include(t => t.Table).SingleOrDefaultAsync(t => t.TournamentID == id);
             if (tournament == null)
             {
                 return NotFound();
