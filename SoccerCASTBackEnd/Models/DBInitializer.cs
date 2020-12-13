@@ -133,7 +133,7 @@ namespace SoccerCASTBackEnd.Models {
             context.SaveChanges();
 
             Tournament tournament1 = new Tournament { Edition = "Doomsday 2020", Total_Joined = 8, Match_Count = 8, isStart = false, Winner = "De bananentros" };
-            Tournament tournament2 = new Tournament { Edition = "Christmans 2020", Total_Joined = 4, Match_Count = 8, isStart = false };
+            Tournament tournament2 = new Tournament { Edition = "Fruit Bowl 2020", Total_Joined = 4, Match_Count = 8, isStart = false };
 
             context.Tournaments.AddRange(tournament1, tournament2);
             context.SaveChanges();
